@@ -1,0 +1,16 @@
+<resources>
+    <string name="auth_sign_in">Sign in</string>
+    <string name="auth_sign_out">Sign out</string>
+    <string name="auth_sign_out_title">Want to sign out?</string>
+    <string name="auth_sign_out_message">All local data will be lost.</string>
+    <string name="auth_sign_out_confirm">Yes</string>
+    <string name="auth_sign_out_cancel">No</string>
+    <string name="auth_sign_in_email">Sign in with Email</string>
+    <string name="auth_sign_in_email_verify_title">We've sent a code to your email</string>
+    <string name="auth_sign_in_email_placeholder">Email</string>
+    <string name="auth_sign_in_email_action">Continue</string>
+    <string name="auth_sign_in_google">Sign in with Google</string>
+    <string name="auth_otp_placeholder">Verification code</string>
+    <string name="auth_otp_action_verify">Verify</string>
+    <string name="auth_otp_action_resend">Resend</string>
+</resources>

@@ -14,7 +14,6 @@ import kotli.app.navigation.b.presentation.BViewModel
 import kotli.app.navigation.c.presentation.CRoute
 import kotli.app.navigation.c.presentation.CScreen
 import kotli.app.navigation.c.presentation.CViewModel
-import kotli.app.navigation.provide.presentation.NavigationViewModel
 import org.koin.dsl.module
 
 fun NavGraphBuilder.navigation(navController: NavHostController) {
@@ -27,7 +26,6 @@ fun InitializerViewModelFactoryBuilder.navigation() {
     initializer { AViewModel() }
     initializer { BViewModel() }
     initializer { CViewModel() }
-    initializer { NavigationViewModel() }
 }
 
 val navigation = module {}

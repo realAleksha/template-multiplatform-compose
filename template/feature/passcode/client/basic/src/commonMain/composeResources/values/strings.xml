@@ -1,0 +1,14 @@
+<resources>
+    <string name="passcode_set_unlock_title">Enter existing PIN code</string>
+    <string name="passcode_set_enter_new_title">Enter new PIN code</string>
+    <string name="passcode_set_confirm_new_title">Confirm new PIN code</string>
+    <string name="passcode_set_confirm_new_error">PIN code don't match. Try again.</string>
+    <string name="passcode_unlock_title">Enter PIN</string>
+    <string name="passcode_unlock_forgot">Forgot?</string>
+    <string name="passcode_unlock_error">Wrong PIN (%1$d more attempts)</string>
+    <string name="passcode_reset_title">Enter existing PIN code</string>
+    <string name="passcode_forgot_title">Reset your pin code?</string>
+    <string name="passcode_forgot_message">All local data will be lost</string>
+    <string name="passcode_forgot_yes">Yes</string>
+    <string name="passcode_forgot_no">No</string>
+</resources>

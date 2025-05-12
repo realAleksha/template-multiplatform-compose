@@ -16,7 +16,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "template-multiplatform-compose"
+rootProject.name = "tmc-test"
 
 include(":processor")
 includeBuild("./template")

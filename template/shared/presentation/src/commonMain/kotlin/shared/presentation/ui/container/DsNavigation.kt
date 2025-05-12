@@ -45,9 +45,14 @@ data class DsNavigationItem(
 
 @Stable
 interface DsNavigationState {
+
     val items: List<DsNavigationItem>
     val selected: DsNavigationItem?
-    var visible: Boolean?
+    val visible: Boolean?
+
+    fun setVisible(visible: Boolean)
+    fun setSelectedItem(selected: DsNavigationItem?)
+    fun setNavigationItems(items: List<DsNavigationItem>)
 }
 
 @Composable
@@ -105,7 +110,7 @@ fun DsDismissibleNavigation(
                         selected = isSelected,
                         onClick = {
                             item.onClick()
-                            state.visible = false
+                            state.setVisible(false)
                         }
                     )
                 }
@@ -143,7 +148,7 @@ fun DsModalNavigation(
                         selected = isSelected,
                         onClick = {
                             item.onClick()
-                            state.visible = false
+                            state.setVisible(false)
                         }
                     )
                 }
@@ -161,7 +166,7 @@ fun DsPermanentNavigation(
     content: @Composable () -> Unit
 ) {
     if (state.visible == false) return run { content() }
-    val items = state.items.takeIf { items -> items.isNotEmpty() } ?: return run { content() }
+    val items = state.items.takeIf({ items -> items.isNotEmpty() }) ?: return run { content() }
 
     PermanentNavigationDrawer(
         modifier = modifier,
@@ -227,7 +232,7 @@ private fun createDrawerState(state: DsNavigationState): DrawerState {
     val initial =
         remember(state) { if (state.visible == true) DrawerValue.Open else DrawerValue.Closed }
     val drawerState: DrawerState = rememberDrawerState(initial) { drawerValue ->
-        state.visible = drawerValue == DrawerValue.Open
+        state.setVisible(drawerValue == DrawerValue.Open)
         true
     }
     DrawerVisibilityHandler(state, drawerState)
