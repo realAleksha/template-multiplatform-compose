@@ -23,10 +23,9 @@ fun DsText(
     fontStyle: FontStyle? = null,
     fontWeight: FontWeight? = null,
 ) {
-    if (text == null) return
     Text(
         modifier = modifier,
-        text = text,
+        text = text.orEmpty(),
         color = color,
         maxLines = maxLines,
         textAlign = textAlign,

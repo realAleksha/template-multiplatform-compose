@@ -4,64 +4,68 @@ import androidx.lifecycle.viewmodel.InitializerViewModelFactoryBuilder
 import androidx.lifecycle.viewmodel.initializer
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import feature.auth.api.AuthFeature
+import feature.auth.stub.StubAuthProvider
+import feature.common.api.Feature
+import feature.navigation.api.NavigationFeature
+import feature.navigation.basic.BasicNavigationProvider
+import feature.passcode.api.PasscodeFeature
+import feature.passcode.basic.BasicPasscodeProvider
+import feature.theme.api.ThemeFeature
+import feature.theme.basic.BasicThemeProvider
 import kotli.app.app.presentation.AppMutableState
 import kotli.app.app.presentation.AppState
 import kotli.app.app.presentation.AppViewModel
-import kotli.app.auth.auth
 import kotli.app.common.common
+import kotli.app.features.features
 import kotli.app.get
 import kotli.app.home.home
-import kotli.app.navigation.navigation
-import kotli.app.passcode.passcode
 import kotli.app.platform.platform
-import kotli.app.profile.profile
-import kotli.app.showcases.showcases
 import kotli.app.template.feature.template
-import kotli.app.theme.theme
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
-import shared.presentation.ui.component.DsSnackbarState
 
 fun NavGraphBuilder.app(navController: NavHostController) {
     platform(navController)
-    auth(navController)
     common(navController)
+    features(navController)
     home(navController)
-    navigation(navController)
-    passcode(navController)
-    profile(navController)
-    showcases(navController)
     template(navController)
-    theme(navController)
 }
 
 fun InitializerViewModelFactoryBuilder.app() {
-    initializer { AppViewModel(get()) }
+    initializer { AppViewModel(get(), get()) }
     platform()
-    auth()
     common()
+    features()
     home()
-    navigation()
-    passcode()
-    profile()
-    showcases()
     template()
-    theme()
 }
 
 val app = module {
-    single { DsSnackbarState() }
-    single { AppMutableState(get()) }.bind(AppState::class)
     includes(
         platform,
-        auth,
         common,
+        features,
         home,
-        navigation,
-        passcode,
-        profile,
-        showcases,
-        template,
-        theme,
+        template
     )
+
+    single<ThemeFeature> { BasicThemeProvider(get()) }
+    single<PasscodeFeature> { BasicPasscodeProvider(get(), get()) }
+    single<NavigationFeature> { BasicNavigationProvider() }
+    single<AuthFeature> { StubAuthProvider() }
+//    single<AuthFeature> { SupabaseAuthProvider(get<SupabaseSource>().client) }
+
+    single<List<Feature>> {
+        listOf(
+            get<ThemeFeature>(),
+            get<PasscodeFeature>(),
+            get<NavigationFeature>(),
+            get<AuthFeature>()
+        )
+    }
+
+    singleOf(::AppMutableState).bind<AppState>()
 }

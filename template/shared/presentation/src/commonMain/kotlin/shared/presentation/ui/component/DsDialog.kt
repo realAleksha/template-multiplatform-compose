@@ -12,6 +12,7 @@ import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
@@ -100,13 +101,15 @@ fun DsDialog(
 @NonRestartableComposable
 fun DsDialogContent(
     modifier: Modifier = Modifier,
+    contentAlignment: Alignment = Alignment.Center,
     content: @Composable BoxScope.() -> Unit
 ) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(24.dp))
             .background(DsTheme.current.surface)
-            .padding(24.dp)
+            .padding(24.dp),
+        contentAlignment = contentAlignment
     ) {
         content()
     }

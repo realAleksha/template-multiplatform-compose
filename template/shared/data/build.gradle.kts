@@ -6,13 +6,7 @@ plugins {
 
 kotlin {
     // {platform.android.target}
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = libs.versions.android.jvmTarget.get()
-            }
-        }
-    }
+    androidTarget()
     // {platform.android.target}
     // {platform.ios.target}
     iosX64()
@@ -31,14 +25,15 @@ kotlin {
     sourceSets {
         all {
             languageSettings {
+                optIn("kotlin.time.ExperimentalTime")
                 optIn("kotlin.ExperimentalStdlibApi")
                 optIn("kotlinx.coroutines.DelicateCoroutinesApi")
                 optIn("kotlin.io.encoding.ExperimentalEncodingApi")
                 optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+                optIn("kotlinx.datetime.format.FormatStringsInDatetimeFormats")
             }
         }
         commonMain.dependencies {
-            api(libs.kotlinx.datetime)
             api(libs.bundles.ktor.common)
             api(libs.kotlinx.coroutines.core)
             api(libs.kotlinx.serialization.json)

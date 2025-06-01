@@ -1,0 +1,10 @@
+<resources>
+    <string name="theme_change_title">Change theme</string>
+    <string name="theme_change_dynamic_color">Use Dynamic Color</string>
+    <string name="theme_change_dynamic_color_on">Yes</string>
+    <string name="theme_change_dynamic_color_off">No</string>
+    <string name="theme_change_dark_mode">Dark mode preference</string>
+    <string name="theme_change_dark_mode_system">System default</string>
+    <string name="theme_change_dark_mode_on">Dark</string>
+    <string name="theme_change_dark_mode_off">Light</string>
+</resources>

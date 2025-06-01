@@ -6,18 +6,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import shared.presentation.ui.component.DsSnackbarState
 
 @Composable
 fun DsScaffold(
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
-    snackbarState: DsSnackbarState = remember { DsSnackbarState() },
     content: @Composable (PaddingValues) -> Unit = {},
 ) {
     Scaffold(
@@ -27,7 +23,6 @@ fun DsScaffold(
         bottomBar = bottomBar,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = FabPosition.End,
-        snackbarHost = { SnackbarHost(snackbarState.hostState) },
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(ScaffoldDefaults.contentWindowInsets),
     )
 }

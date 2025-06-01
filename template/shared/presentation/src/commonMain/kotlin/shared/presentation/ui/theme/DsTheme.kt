@@ -57,6 +57,11 @@ data class DsTheme(
         val current: DsTheme
             @Composable
             @ReadOnlyComposable
-            get() = localTheme.current as? DsTheme ?: error("not available outside of ThemeProvider")
+            get() = currentOrNull ?: error("not available outside of ThemeProvider")
+
+        val currentOrNull: DsTheme?
+            @Composable
+            @ReadOnlyComposable
+            get() = localTheme.current as? DsTheme
     }
 }

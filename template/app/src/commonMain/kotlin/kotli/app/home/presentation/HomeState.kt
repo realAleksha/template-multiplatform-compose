@@ -6,5 +6,4 @@ import androidx.compose.runtime.Stable
 interface HomeState {
 
     val title: String
-
 }
