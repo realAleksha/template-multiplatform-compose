@@ -19,6 +19,7 @@ data class DsTheme(
     val error: Color = colorScheme.error
     val surface: Color = colorScheme.surface
     val onSurface: Color = colorScheme.onSurface
+    val onSurfaceSecondary: Color = onSurface.copy(alpha = 0.65f)
 
     val highlightPrimary: Color = colorScheme.onSurface.copy(alpha = 0.15f)
     val highlightSecondary: Color = colorScheme.onSurface.copy(alpha = 0.1f)
@@ -57,6 +58,11 @@ data class DsTheme(
         val current: DsTheme
             @Composable
             @ReadOnlyComposable
-            get() = localTheme.current as? DsTheme ?: error("not available outside of ThemeProvider")
+            get() = currentOrNull ?: error("not available outside of ThemeProvider")
+
+        val currentOrNull: DsTheme?
+            @Composable
+            @ReadOnlyComposable
+            get() = localTheme.current as? DsTheme
     }
 }

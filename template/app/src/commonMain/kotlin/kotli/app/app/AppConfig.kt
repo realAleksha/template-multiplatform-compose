@@ -4,64 +4,93 @@ import androidx.lifecycle.viewmodel.InitializerViewModelFactoryBuilder
 import androidx.lifecycle.viewmodel.initializer
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import feature.auth.api.AuthFeature
+import feature.auth.stub.StubAuthProvider
+import feature.auth.supabase.SupabaseAuthProvider
+import feature.common.api.Feature
+import feature.loader.api.LoaderFeature
+import feature.loader.basic.BasicLoaderProvider
+import feature.navigation.api.NavigationFeature
+import feature.navigation.basic.BasicNavigationProvider
+import feature.passcode.api.PasscodeFeature
+import feature.passcode.basic.BasicPasscodeProvider
+import feature.payments.api.PaymentsFeature
+import feature.payments.revenuecat.RevenueCatPaymentsProvider
+import feature.splash.api.SplashFeature
+import feature.splash.basic.BasicSplashProvider
+import feature.theme.api.ThemeFeature
+import feature.theme.basic.BasicThemeProvider
 import kotli.app.app.presentation.AppMutableState
 import kotli.app.app.presentation.AppState
 import kotli.app.app.presentation.AppViewModel
-import kotli.app.auth.auth
 import kotli.app.common.common
+import kotli.app.common.data.source.supabase.SupabaseSource
+import kotli.app.feature.feature
 import kotli.app.get
 import kotli.app.home.home
-import kotli.app.navigation.navigation
-import kotli.app.passcode.passcode
 import kotli.app.platform.platform
-import kotli.app.profile.profile
-import kotli.app.showcases.showcases
-import kotli.app.template.feature.template
-import kotli.app.theme.theme
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
-import shared.presentation.ui.component.DsSnackbarState
+import shared.presentation.theme.DefaultThemeState
+import shared.presentation.theme.ThemeConfig
+import shared.presentation.theme.ThemeState
+import shared.presentation.ui.theme.DsThemes
 
 fun NavGraphBuilder.app(navController: NavHostController) {
     platform(navController)
-    auth(navController)
     common(navController)
+    feature(navController)
     home(navController)
-    navigation(navController)
-    passcode(navController)
-    profile(navController)
-    showcases(navController)
-    template(navController)
-    theme(navController)
 }
 
 fun InitializerViewModelFactoryBuilder.app() {
-    initializer { AppViewModel(get()) }
+    initializer { AppViewModel(get(), get(), get()) }
     platform()
-    auth()
     common()
+    feature()
     home()
-    navigation()
-    passcode()
-    profile()
-    showcases()
-    template()
-    theme()
 }
 
 val app = module {
-    single { DsSnackbarState() }
-    single { AppMutableState(get()) }.bind(AppState::class)
     includes(
         platform,
-        auth,
         common,
-        home,
-        navigation,
-        passcode,
-        profile,
-        showcases,
-        template,
-        theme,
+        feature,
+        home
     )
+
+    single<ThemeState> {
+        DefaultThemeState(
+            defaultConfig = ThemeConfig(
+                defaultTheme = DsThemes.Light,
+                lightTheme = DsThemes.Light,
+                darkTheme = DsThemes.Dark,
+            )
+        )
+    }
+
+    single<SplashFeature> { BasicSplashProvider() }
+    single<LoaderFeature> { BasicLoaderProvider() }
+    single<NavigationFeature> { BasicNavigationProvider() }
+    single<PaymentsFeature> { RevenueCatPaymentsProvider() }
+    single<ThemeFeature> { BasicThemeProvider(get(), get()) }
+    single<PasscodeFeature> { BasicPasscodeProvider(get(), get()) }
+    single<AuthFeature>(SupabaseAuthProvider.qualifier) { SupabaseAuthProvider(get<SupabaseSource>().client) }
+    single<AuthFeature>(StubAuthProvider.qualifier) { StubAuthProvider() }
+
+    single<List<Feature>> {
+        listOf(
+            get<SplashFeature>(),
+            get<ThemeFeature>(),
+            get<LoaderFeature>(),
+            get<PasscodeFeature>(),
+            get<NavigationFeature>(),
+            get<AuthFeature>(StubAuthProvider.qualifier),
+            get<AuthFeature>(SupabaseAuthProvider.qualifier),
+            get<PaymentsFeature>()
+        )
+    }
+
+    singleOf(::AppMutableState).bind<AppState>()
 }

@@ -13,13 +13,7 @@ plugins {
 }
 kotlin {
     // {platform.android.target}
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = libs.versions.android.jvmTarget.get()
-            }
-        }
-    }
+    androidTarget()
     // {platform.android.target}
     // {platform.ios.target}
     listOf(
@@ -53,6 +47,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings {
+                optIn("kotlin.time.ExperimentalTime")
                 optIn("kotlinx.coroutines.FlowPreview")
                 optIn("kotlinx.cinterop.ExperimentalForeignApi")
                 optIn("kotlinx.coroutines.DelicateCoroutinesApi")
@@ -80,6 +75,23 @@ kotlin {
             implementation(projects.shared.data)
             implementation(projects.shared.domain)
             implementation(projects.shared.presentation)
+            implementation(projects.feature.common.client.api)
+            implementation(projects.feature.common.client.preview)
+            implementation(projects.feature.loader.client.api)
+            implementation(projects.feature.loader.client.basic)
+            implementation(projects.feature.theme.client.api)
+            implementation(projects.feature.theme.client.basic)
+            implementation(projects.feature.splash.client.api)
+            implementation(projects.feature.splash.client.basic)
+            implementation(projects.feature.auth.client.api)
+            implementation(projects.feature.auth.client.stub)
+            implementation(projects.feature.auth.client.supabase)
+            implementation(projects.feature.passcode.client.api)
+            implementation(projects.feature.passcode.client.basic)
+            implementation(projects.feature.payments.client.api)
+            implementation(projects.feature.payments.client.revenuecat)
+            implementation(projects.feature.navigation.client.api)
+            implementation(projects.feature.navigation.client.basic)
         }
         // {platform.android.dependencies}
         androidMain.dependencies {

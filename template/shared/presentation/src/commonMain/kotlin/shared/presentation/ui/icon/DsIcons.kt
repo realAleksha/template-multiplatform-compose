@@ -5,14 +5,12 @@ import template.shared.presentation.generated.resources.ic_arrow_back
 import template.shared.presentation.generated.resources.ic_backspace
 import template.shared.presentation.generated.resources.ic_cancel
 import template.shared.presentation.generated.resources.ic_chevron_right
-import template.shared.presentation.generated.resources.ic_coffee
 import template.shared.presentation.generated.resources.ic_dark_mode
 import template.shared.presentation.generated.resources.ic_delete
+import template.shared.presentation.generated.resources.ic_home
 import template.shared.presentation.generated.resources.ic_info
 import template.shared.presentation.generated.resources.ic_light_mode
-import template.shared.presentation.generated.resources.ic_local_drink
 import template.shared.presentation.generated.resources.ic_school
-import template.shared.presentation.generated.resources.ic_wine_bar
 
 object DsIcons {
 
@@ -30,14 +28,10 @@ object DsIcons {
         get() = DsIconModel.DrawableResource(Res.drawable.ic_dark_mode)
     val school: DsIconModel
         get() = DsIconModel.DrawableResource(Res.drawable.ic_school)
-    val coffee: DsIconModel
-        get() = DsIconModel.DrawableResource(Res.drawable.ic_coffee)
-    val wineBar: DsIconModel
-        get() = DsIconModel.DrawableResource(Res.drawable.ic_wine_bar)
-    val localDrink: DsIconModel
-        get() = DsIconModel.DrawableResource(Res.drawable.ic_local_drink)
     val delete: DsIconModel
         get() = DsIconModel.DrawableResource(Res.drawable.ic_delete)
     val backspace: DsIconModel
         get() = DsIconModel.DrawableResource(Res.drawable.ic_backspace)
+    val home: DsIconModel
+        get() = DsIconModel.DrawableResource(Res.drawable.ic_home)
 }

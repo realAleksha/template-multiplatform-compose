@@ -5,7 +5,6 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.dialog
 import kotli.app.get
 import kotli.app.showcases.presentation.ShowcasesRoute
 import kotli.app.showcases.presentation.ShowcasesScreen
@@ -50,8 +49,6 @@ import kotli.app.showcases.presentation.userflow.common.component.image.coil.Coi
 import kotli.app.showcases.presentation.userflow.common.component.image.coil.CoilScreen
 import kotli.app.showcases.presentation.userflow.common.component.markdown.MarkdownRoute
 import kotli.app.showcases.presentation.userflow.common.component.markdown.MarkdownScreen
-import kotli.app.showcases.presentation.userflow.theme.toggle.ToggleThemeRoute
-import kotli.app.showcases.presentation.userflow.theme.toggle.ToggleThemeScreen
 import org.koin.dsl.module
 import shared.presentation.navigation.back
 import shared.presentation.navigation.newInstance
@@ -72,7 +69,6 @@ fun NavGraphBuilder.showcases(navController: NavHostController) {
     composable<RoomPagingRoute> { RoomPagingScreen(navController::back) }
     composable<SqlDelightCrudRoute> { SqlDelightCrudScreen(navController::back) }
     composable<SqlDelightPagingRoute> { SqlDelightPagingScreen(navController::back) }
-    dialog<ToggleThemeRoute> { ToggleThemeScreen() }
 }
 
 fun InitializerViewModelFactoryBuilder.showcases() {
@@ -82,13 +78,13 @@ fun InitializerViewModelFactoryBuilder.showcases() {
     initializer { PrimitiveSettingsViewModel(get()) }
     initializer { ObjectSettingsViewModel(get()) }
     initializer { SqlDelightCrudViewModel(get()) }
-    initializer { SqlDelightPagingViewModel(get(), get(), get()) }
+    initializer { SqlDelightPagingViewModel(get(), get()) }
     initializer { BasicCacheViewModel(get()) }
     initializer { BasicEncryptionViewModel(get()) }
     initializer { FilePickerViewModel() }
     initializer { GeminiViewModel(get()) }
     initializer { RoomCrudViewModel(get()) }
-    initializer { RoomPagingViewModel(get(), get(), get()) }
+    initializer { RoomPagingViewModel(get(), get()) }
 }
 
 val showcases = module {}

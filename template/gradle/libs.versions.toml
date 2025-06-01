@@ -6,32 +6,32 @@ android-minSdk = "24"
 android-targetSdk = "35"
 androidx-activity = "1.10.1"
 androidx-appcompat = "1.7.0"
-androidx-datastore = "1.1.6"
-androidx-lifecycle = "2.9.0-beta01"
-androidx-navigation = "2.9.0-beta01"
+androidx-datastore = "1.1.7"
+androidx-lifecycle = "2.9.0"
+androidx-navigation = "2.9.0-beta02"
 androidx-paging = "3.3.6"
 androidx-room = "2.7.1"
 androidx-splashscreen = "1.0.1"
 cashapp-paging = "3.3.0-alpha02-0.5.1"
-coil = "3.1.0"
-compose-multiplatform = "1.8.0"
+coil = "3.2.0"
+compose-multiplatform = "1.8.1"
 compose-hot-reload = "1.0.0-alpha09"
-filekit = "0.10.0-beta03"
+filekit = "0.10.0-beta04"
 generativeai = "0.9.0-1.0.1"
-koin = "4.0.4"
+koin = "4.1.0"
 korlibs = "6.0.0"
 kotlin = "2.1.20"
 kotlin-logging = "7.0.7"
 kotlinx-coroutines = "1.10.2"
-kotlinx-datetime = "0.6.2"
 kotlinx-serialization-json = "1.8.1"
 ktor = "3.1.2"
 ksp = "2.1.20-1.0.32"
 logback = "1.5.18"
-markdown-renderer = "0.34.0-rc03"
+markdown-renderer = "0.34.0"
 multiplatform-settings = "1.3.0"
 multiplatform-expressions-evaluator = "1.1.1"
 napier = "2.7.1"
+purchases-kmp = "1.8.2+13.35.0"
 slf4j-simple = "2.0.17"
 sqldelight = "2.0.2"
 sqlite-bundled = "2.5.1"
@@ -57,11 +57,11 @@ coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.r
 filekit-compose = { module = "io.github.vinceglb:filekit-dialogs-compose", version.ref = "filekit" }
 generativeai = { module = "dev.shreyaspatil.generativeai:generativeai-google", version.ref = "generativeai" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin" }
 korlibs-crypto = { module = "com.soywiz:korlibs-crypto", version.ref = "korlibs" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
-kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 kotlin-logging = { module = "io.github.oshai:kotlin-logging", version.ref = "kotlin-logging" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -89,6 +89,7 @@ markdown-renderer-coil3 = { module = "com.mikepenz:multiplatform-markdown-render
 multiplatform-expressions-evaluator = { module = "io.github.murzagalin:multiplatform-expressions-evaluator", version.ref = "multiplatform-expressions-evaluator" }
 multiplatform-settings-no-arg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatform-settings" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
+purchases-core = { module = "com.revenuecat.purchases:purchases-kmp-core", version.ref = "purchases-kmp" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j-simple" }
 sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }

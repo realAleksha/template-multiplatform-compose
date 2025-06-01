@@ -19,9 +19,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.Clock
 import shared.data.misc.isCancellationException
 import kotlin.reflect.KClass
+import kotlin.time.Clock
 
 /**
  * Basic implementation of a thread-safe cache for storing and retrieving in-memory data.

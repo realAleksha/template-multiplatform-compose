@@ -6,13 +6,7 @@ plugins {
 
 kotlin {
     // {platform.android.target}
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = libs.versions.android.jvmTarget.get()
-            }
-        }
-    }
+    androidTarget()
     // {platform.android.target}
     // {platform.ios.target}
     iosX64()

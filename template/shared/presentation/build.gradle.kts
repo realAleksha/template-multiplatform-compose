@@ -8,13 +8,7 @@ plugins {
 
 kotlin {
     // {platform.android.target}
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = libs.versions.android.jvmTarget.get()
-            }
-        }
-    }
+    androidTarget()
     // {platform.android.target}
     // {platform.ios.target}
     iosX64()
@@ -33,6 +27,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings {
+                optIn("kotlin.time.ExperimentalTime")
                 optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
                 optIn("androidx.compose.material3.ExperimentalMaterial3Api")
                 optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
@@ -40,7 +35,6 @@ kotlin {
         }
         commonMain.dependencies {
             api(compose.foundation)
-            api(libs.kotlinx.datetime)
             api(libs.kotlinx.coroutines.core)
             api(libs.kotlinx.serialization.json)
             api(libs.androidx.navigation.compose)

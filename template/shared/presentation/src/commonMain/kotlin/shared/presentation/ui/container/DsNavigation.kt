@@ -1,6 +1,5 @@
 package shared.presentation.ui.container
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -45,9 +44,14 @@ data class DsNavigationItem(
 
 @Stable
 interface DsNavigationState {
+
     val items: List<DsNavigationItem>
     val selected: DsNavigationItem?
-    var visible: Boolean?
+    val visible: Boolean?
+
+    fun setVisible(visible: Boolean)
+    fun setSelectedItem(selected: DsNavigationItem?)
+    fun setNavigationItems(items: List<DsNavigationItem>)
 }
 
 @Composable
@@ -105,7 +109,7 @@ fun DsDismissibleNavigation(
                         selected = isSelected,
                         onClick = {
                             item.onClick()
-                            state.visible = false
+                            state.setVisible(false)
                         }
                     )
                 }
@@ -143,7 +147,7 @@ fun DsModalNavigation(
                         selected = isSelected,
                         onClick = {
                             item.onClick()
-                            state.visible = false
+                            state.setVisible(false)
                         }
                     )
                 }
@@ -161,7 +165,7 @@ fun DsPermanentNavigation(
     content: @Composable () -> Unit
 ) {
     if (state.visible == false) return run { content() }
-    val items = state.items.takeIf { items -> items.isNotEmpty() } ?: return run { content() }
+    val items = state.items.takeIf({ items -> items.isNotEmpty() }) ?: return run { content() }
 
     PermanentNavigationDrawer(
         modifier = modifier,
@@ -192,34 +196,30 @@ fun DsPermanentNavigation(
 @Composable
 fun DsRailNavigation(
     state: DsNavigationState,
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
+    modifier: Modifier = Modifier
 ) {
-    if (state.visible == false) return run { content() }
-    val items = state.items.takeIf { items -> items.isNotEmpty() } ?: return run { content() }
+    if (state.visible == false) return
+    val items = state.items.takeIf { items -> items.isNotEmpty() } ?: return
 
-    Row(modifier = modifier) {
-        NavigationRail(
-            modifier = Modifier
-                .fillMaxHeight()
-                .verticalScroll(rememberScrollState()),
-            content = {
-                DsSpacer8()
-                val selected = state.selected
-                items.forEach { item ->
-                    val isSelected = item.id == selected?.id
-                    NavigationRailItem(
-                        label = { DsText(text = item.label) },
-                        icon = { DsIcon(model = item.getIcon(isSelected)) },
-                        onClick = item.onClick,
-                        selected = isSelected,
-                    )
-                }
-                DsSpacer8()
+    NavigationRail(
+        modifier = modifier
+            .fillMaxHeight()
+            .verticalScroll(rememberScrollState()),
+        content = {
+            DsSpacer8()
+            val selected = state.selected
+            items.forEach { item ->
+                val isSelected = item.id == selected?.id
+                NavigationRailItem(
+                    label = { DsText(text = item.label) },
+                    icon = { DsIcon(model = item.getIcon(isSelected)) },
+                    onClick = item.onClick,
+                    selected = isSelected,
+                )
             }
-        )
-        content()
-    }
+            DsSpacer8()
+        }
+    )
 }
 
 @Composable
@@ -227,7 +227,7 @@ private fun createDrawerState(state: DsNavigationState): DrawerState {
     val initial =
         remember(state) { if (state.visible == true) DrawerValue.Open else DrawerValue.Closed }
     val drawerState: DrawerState = rememberDrawerState(initial) { drawerValue ->
-        state.visible = drawerValue == DrawerValue.Open
+        state.setVisible(drawerValue == DrawerValue.Open)
         true
     }
     DrawerVisibilityHandler(state, drawerState)

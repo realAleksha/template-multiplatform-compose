@@ -15,13 +15,9 @@ import kotli.app.showcases.presentation.dataflow.settings.`object`.ObjectSetting
 import kotli.app.showcases.presentation.dataflow.settings.primitive.PrimitiveSettingsRoute
 import kotli.app.showcases.presentation.dataflow.sqldelight.crud.SqlDelightCrudRoute
 import kotli.app.showcases.presentation.dataflow.sqldelight.paging.SqlDelightPagingRoute
-import kotli.app.showcases.presentation.userflow.auth.AuthShowcases
 import kotli.app.showcases.presentation.userflow.common.component.filepicker.FilePickerRoute
 import kotli.app.showcases.presentation.userflow.common.component.image.coil.CoilRoute
 import kotli.app.showcases.presentation.userflow.common.component.markdown.MarkdownRoute
-import kotli.app.showcases.presentation.userflow.passcode.PasscodeShowcases
-import kotli.app.showcases.presentation.userflow.theme.change.ChangeThemeShowcases
-import kotli.app.showcases.presentation.userflow.theme.toggle.ToggleThemeRoute
 import shared.presentation.viewmodel.BaseViewModel
 
 class ShowcasesViewModel : BaseViewModel() {
@@ -46,16 +42,6 @@ class ShowcasesViewModel : BaseViewModel() {
         SqlDelightPagingRoute.screen,
         Showcase.Header("Data Flow :: AI"),
         GeminiRoute.screen,
-        Showcase.Header("User Flow :: Theme"),
-        ChangeThemeShowcases.screen,
-        ChangeThemeShowcases.dialog,
-        ChangeThemeShowcases.bottomSheet,
-        ToggleThemeRoute.screen,
-        Showcase.Header("User Flow :: Passcode"),
-        PasscodeShowcases.set,
-        PasscodeShowcases.reset,
-        Showcase.Header("User Flow :: Auth"),
-        AuthShowcases.basic,
         Showcase.Header("User Flow :: Components"),
         FilePickerRoute.screen,
         MarkdownRoute.screen,
