@@ -1,4 +1,3 @@
-import org.jetbrains.compose.reload.ComposeHotRun // {platform.jvm}
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag // {platform.jvm}
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -9,7 +8,6 @@ plugins {
     alias(libs.plugins.sqldelight) // {data.database.sqldelight}
     alias(libs.plugins.ksp) // {common.ksp}
     alias(libs.plugins.room) // {data.database.room}
-    alias(libs.plugins.hot.reload) // {platform.jvm}
 }
 kotlin {
     // {platform.android.target}
@@ -17,7 +15,6 @@ kotlin {
     // {platform.android.target}
     // {platform.ios.target}
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -29,7 +26,7 @@ kotlin {
     }
     // {platform.ios.target}
     // {platform.js.target}
-    js(IR) {
+    js {
         useEsModules()
         browser {
             commonWebpackConfig {
@@ -40,6 +37,18 @@ kotlin {
         binaries.executable()
     }
     // {platform.js.target}
+    // {platform.wasmJs.target}
+    wasmJs {
+        useEsModules()
+        browser {
+            commonWebpackConfig {
+                outputFileName = "app.js"
+            }
+            useCommonJs()
+        }
+        binaries.executable()
+    }
+    // {platform.wasmJs.target}
     // {platform.jvm.target}
     jvm()
     // {platform.jvm.target}
@@ -49,7 +58,7 @@ kotlin {
             languageSettings {
                 optIn("kotlin.time.ExperimentalTime")
                 optIn("kotlinx.coroutines.FlowPreview")
-                optIn("kotlinx.cinterop.ExperimentalForeignApi")
+                optIn("kotlin.js.ExperimentalWasmJsInterop")
                 optIn("kotlinx.coroutines.DelicateCoroutinesApi")
                 optIn("androidx.compose.ui.ExperimentalComposeUiApi")
                 optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
@@ -58,10 +67,13 @@ kotlin {
             }
         }
         commonMain.dependencies {
-            implementation(compose.components.resources)
+            implementation(libs.compose.components.resources)
             implementation(libs.koin.compose.viewmodel.navigation)
             implementation(libs.kotlin.logging)
             implementation(libs.napier)
+            implementation(libs.androidx.room.runtime) // {data.database.room}
+            implementation(libs.androidx.sqlite) // {data.database.sqlite}
+            implementation(libs.sqldelight.androidx.paging) // {data.database.sqldelight}
             implementation(libs.sqldelight.coroutines) // {data.database.sqldelight}
             implementation(libs.touchlab.kermit)
             implementation(libs.supabase)
@@ -95,11 +107,13 @@ kotlin {
         // {platform.android.dependencies}
         androidMain.dependencies {
             implementation(libs.androidx.splashscreen)
+            implementation(libs.androidx.sqlite.framework) // {data.database.sqlite}
             implementation(libs.sqldelight.android.driver) // {data.database.sqldelight}
         }
         // {platform.android.dependencies}
         // {platform.ios.dependencies}
         iosMain.dependencies {
+            implementation(libs.androidx.sqlite.framework) // {data.database.sqlite}
             implementation(libs.sqldelight.native.driver) // {data.database.sqldelight}
             implementation(libs.touchlab.stately.common) // {data.database.sqldelight}
             implementation(libs.touchlab.stately.isolate) // {data.database.sqldelight}
@@ -108,44 +122,32 @@ kotlin {
         // {platform.ios.dependencies}
         // {platform.js.dependencies}
         jsMain.dependencies {
+            implementation(libs.androidx.sqlite.web)  // {data.database.sqlite}
             implementation(libs.sqldelight.web.worker.driver) // {data.database.sqldelight}
-            implementation(libs.touchlab.stately.iso.collections.js) // {data.database.sqldelight}
             implementation(npm("sql.js", "1.10.3")) // {data.database.sqldelight}
             implementation(npm("@cashapp/sqldelight-sqljs-worker", libs.versions.sqldelight.get())) // {data.database.sqldelight}
             implementation(devNpm("copy-webpack-plugin", "9.1.0")) // {data.database.sqldelight}
         }
         // {platform.js.dependencies}
+        // {platform.wasmJs.dependencies}
+        wasmJsMain.dependencies {
+            implementation(libs.androidx.sqlite.web)  // {data.database.sqlite}
+            implementation(libs.sqldelight.web.worker.driver) // {data.database.sqldelight}
+            implementation(npm("sql.js", "1.10.3")) // {data.database.sqldelight}
+            implementation(npm("@cashapp/sqldelight-sqljs-worker", libs.versions.sqldelight.get())) // {data.database.sqldelight}
+            implementation(devNpm("copy-webpack-plugin", "9.1.0")) // {data.database.sqldelight}
+        }
+        // {platform.wasmJs.dependencies}
         // {platform.jvm.dependencies}
         jvmMain.dependencies {
             implementation(libs.slf4j.simple) // {kotlin.logging}
             implementation(compose.desktop.currentOs)
+            implementation(libs.androidx.sqlite.bundled) // {data.database.sqlite}
             implementation(libs.sqldelight.sqlite.driver) // {data.database.sqldelight}
         }
         // {platform.jvm.dependencies}
-        // {platform.mobile_and_desktop.dependencies}
-        val mobileAndDesktopMain by creating {
-            dependsOn(commonMain.get())
-            dependencies {
-                implementation(libs.androidx.room.runtime) // {data.database.room}
-                implementation(libs.sqlite.bundled) // {data.database.sqlite}
-            }
-        }
-        // {platform.mobile_and_desktop.dependencies}
-        androidMain.get().dependsOn(mobileAndDesktopMain) // {platform.android}
-        iosMain.get().dependsOn(mobileAndDesktopMain) // {platform.ios}
-        jvmMain.get().dependsOn(mobileAndDesktopMain) // {platform.jvm}
     }
 }
-// {sqldelight.config}
-sqldelight {
-    databases {
-        create("SqlDelightDb") {
-            packageName.set("kotli.common.data.source.database.sqldelight") // {kotli.namespace}
-            generateAsync.set(true)
-        }
-    }
-}
-// {sqldelight.config}
 // {platform.android.config}
 android {
     namespace = "kotli" // {kotli.namespace}
@@ -221,10 +223,7 @@ compose.desktop {
         }
     }
 }
-tasks.register<ComposeHotRun>("runHot") {
-    group = "compose desktop"
-    mainClass.set("MainKt")
-}
+
 composeCompiler {
     featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
 }
@@ -232,14 +231,25 @@ composeCompiler {
 // {common.ksp.config}
 dependencies {
     add("kspAndroid", libs.androidx.room.compiler) // {platform.android}
+    add("kspJs", libs.androidx.room.compiler) // {platform.js}
+    add("kspWasmJs", libs.androidx.room.compiler) // {platform.wasmJs}
     add("kspJvm", libs.androidx.room.compiler) // {platform.jvm}
-    add("kspIosX64", libs.androidx.room.compiler) // {platform.ios}
     add("kspIosArm64", libs.androidx.room.compiler) // {platform.ios}
     add("kspIosSimulatorArm64", libs.androidx.room.compiler) // {platform.ios}
 }
 // {common.ksp.config}
 // {data.database.room.config}
-room {
+room3 {
     schemaDirectory("$projectDir/schemas")
 }
 // {data.database.room.config}
+// {sqldelight.config}
+sqldelight {
+    databases {
+        create("SqlDelightDb") {
+            packageName.set("kotli.common.data.source.database.sqldelight") // {kotli.namespace}
+            generateAsync.set(true)
+        }
+    }
+}
+// {sqldelight.config}

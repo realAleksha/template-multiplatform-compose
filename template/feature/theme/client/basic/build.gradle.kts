@@ -10,20 +10,16 @@ kotlin {
     applyDefaultHierarchyTemplate()
 
     androidTarget()
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
     js { browser() }
+    wasmJs { browser() }
     jvm()
 
     sourceSets {
-        all {
-            languageSettings {
-                optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
-            }
-        }
         commonMain.dependencies {
-            implementation(compose.components.resources)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.components.resources)
             implementation(projects.shared.data)
             implementation(projects.shared.presentation)
             implementation(projects.feature.common.client.api)

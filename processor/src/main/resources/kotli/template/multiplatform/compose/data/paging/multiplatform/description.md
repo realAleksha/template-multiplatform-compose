@@ -1,1 +1,0 @@
-A library that adds additional Kotlin/Multiplatform targets to AndroidX Paging.

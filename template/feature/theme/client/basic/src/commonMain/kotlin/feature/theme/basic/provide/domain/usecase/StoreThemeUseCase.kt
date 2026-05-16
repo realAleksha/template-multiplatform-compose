@@ -8,6 +8,6 @@ internal class StoreThemeUseCase(
 ) {
 
     suspend fun invoke(model: ThemeConfigModel) {
-        runCatching { repository.store(model) }
+        repository.store(model)
     }
 }

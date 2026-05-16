@@ -10,10 +10,10 @@ kotlin {
     applyDefaultHierarchyTemplate()
 
     androidTarget()
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
     js { browser() }
+    wasmJs { browser() }
     jvm()
 
     sourceSets {
@@ -24,7 +24,7 @@ kotlin {
             }
         }
         commonMain.dependencies {
-            implementation(compose.components.resources)
+            implementation(libs.compose.components.resources)
             implementation(projects.shared.data)
             implementation(projects.shared.presentation)
             implementation(projects.feature.common.client.api)

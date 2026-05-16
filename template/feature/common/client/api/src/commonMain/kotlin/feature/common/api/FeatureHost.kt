@@ -17,6 +17,7 @@ import androidx.navigation.serialization.generateHashCode
 import feature.common.api.preview.FeaturePreviewScreen
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.serialization.serializer
 import shared.presentation.navigation.popDestination
@@ -83,7 +84,7 @@ data class FeatureHostContext(
 ) : FeatureContext {
 
     override fun getCurrentDestinationChanges(): Flow<Int> = navController.currentBackStackEntryFlow
-        .mapNotNull { entry -> entry.destination.id }
+        .map { entry -> entry.destination.id }
         .distinctUntilChanged()
 
     override fun getCurrentDestination(): Int? = navController.currentBackStackEntry?.destination?.id

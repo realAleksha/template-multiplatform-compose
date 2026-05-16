@@ -8,8 +8,10 @@ object Rules {
     const val IndexHtml = "*/index.html"
     const val IosConfig = "*/Config.xcconfig"
     const val AndroidSrcDir = "*/src/androidMain"
+    const val WebSrcDir = "*/src/webMain"
     const val JvmSrcDir = "*/src/jvmMain"
     const val JsSrcDir = "*/src/jsMain"
+    const val WasmJsSrcDir = "*/src/wasmJsMain"
     const val IosSrcDir = "*/ios*"
     const val GradleProperties = "gradle.properties"
 
@@ -34,6 +36,7 @@ object Rules {
     const val ClientSqlDelightConfigJs = "${ClientWebPackConfigDir}/sqljs-config.js"
     const val ClientPlatformConfigKt = "*/PlatformConfig.*.kt"
     const val ClientCommonDatabase = "${ClientCommon}/data/source/database"
+    const val ClientApplicationKt = "${ClientSrc}/*/Application.kt"
 
     // server
     const val ServerDir = "server"
@@ -60,8 +63,7 @@ object Rules {
     const val PagingSourceDir = "${DataDataSourceDir}/paging"
     const val HttpSource = "*/*HttpSource.kt"
     const val SettingsSource = "*/*SettingsSource.kt"
-    const val DataStoreSource = "*/DataStoreSource.kt"
-    const val MultiplatformSettingsSource = "*/MultiplatformSettingsSource.kt"
+    const val DataStoreSource = "*/DataStoreSource*.kt"
     const val EncryptionSource = "*/*EncryptionSource*.kt"
     const val EncryptionDir = "${DataDir}/src/commonMain/kotlin/shared/data/source/encryption"
     const val ExpressionSource = "*/*ExpressionEvaluator*.kt"

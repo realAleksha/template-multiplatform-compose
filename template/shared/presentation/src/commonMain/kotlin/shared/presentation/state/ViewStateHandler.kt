@@ -9,7 +9,6 @@ import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.flow.filterNotNull
 import shared.presentation.ui.component.DsCard
 import shared.presentation.ui.component.DsCircularProgressIndicator
 import shared.presentation.ui.component.DsDialog
@@ -39,9 +38,7 @@ fun ViewStateHandler(
     content: @Composable () -> Unit
 ) {
     LaunchedEffect(state) {
-        state.uiEvent
-            .filterNotNull()
-            .collect(onEvent)
+        state.uiEvent.collect(onEvent)
     }
 
     content()

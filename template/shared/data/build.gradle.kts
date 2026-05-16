@@ -9,15 +9,19 @@ kotlin {
     androidTarget()
     // {platform.android.target}
     // {platform.ios.target}
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
     // {platform.ios.target}
     // {platform.js.target}
-    js(IR) {
+    js {
         browser()
     }
     // {platform.js.target}
+    // {platform.wasmJs.target}
+    wasmJs {
+        browser()
+    }
+    // {platform.wasmJs.target}
     // {platform.jvm.target}
     jvm()
     // {platform.jvm.target}
@@ -27,6 +31,7 @@ kotlin {
             languageSettings {
                 optIn("kotlin.time.ExperimentalTime")
                 optIn("kotlin.ExperimentalStdlibApi")
+                optIn("kotlinx.cinterop.ExperimentalForeignApi")
                 optIn("kotlinx.coroutines.DelicateCoroutinesApi")
                 optIn("kotlin.io.encoding.ExperimentalEncodingApi")
                 optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
@@ -38,10 +43,9 @@ kotlin {
             api(libs.bundles.ktor.common)
             api(libs.kotlinx.coroutines.core)
             api(libs.kotlinx.serialization.json)
-            implementation(libs.generativeai)
             implementation(libs.korlibs.crypto)
-            implementation(libs.cashapp.paging.common)
-            implementation(libs.multiplatform.settings.no.arg) // {data.settings.multiplatform}
+            implementation(libs.androidx.paging.common)
+            implementation(libs.androidx.datastore.preferences) // {data.settings.datastore}
             implementation(libs.multiplatform.expressions.evaluator)
             implementation(libs.touchlab.stately.concurrent.collections) // {common.stately-collections}
         }
@@ -60,28 +64,21 @@ kotlin {
         }
         // {platform.ios.dependencies}
         // {platform.js.dependencies}
-        jsMain.dependencies {
+         jsMain.dependencies {
             implementation(libs.ktor.client.js)
         }
         // {platform.js.dependencies}
+        // {platform.wasmJs.dependencies}
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
+        // {platform.wasmJs.dependencies}
         // {platform.jvm.dependencies}
         jvmMain.dependencies {
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.java)
         }
         // {platform.jvm.dependencies}
-        // {platform.mobile_and_desktop.dependencies}
-        val mobileAndDesktopMain by creating {
-            dependsOn(commonMain.get())
-            dependencies {
-                implementation(libs.androidx.paging.common)
-                implementation(libs.androidx.datastore.preferences) // {data.settings.datastore}
-            }
-        }
-        androidMain.get().dependsOn(mobileAndDesktopMain) // {platform.android}
-        iosMain.get().dependsOn(mobileAndDesktopMain) // {platform.ios}
-        jvmMain.get().dependsOn(mobileAndDesktopMain) // {platform.jvm}
-        // {platform.mobile_and_desktop.dependencies}
     }
 }
 

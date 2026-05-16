@@ -24,7 +24,7 @@ dependencies {
 // {platform.js.config}
 tasks {
     val resourcesMain by lazy { project.layout.buildDirectory.dir("resources/main").get().asFile }
-    register("runDevSPA") {
+    register("runDevJs") {
         group = "spa"
         dependsOn(":client:jsBrowserDevelopmentExecutableDistribution")
         doLast {
@@ -35,7 +35,7 @@ tasks {
         }
         finalizedBy("run")
     }
-    register("runProdSPA") {
+    register("runProdJs") {
         group = "spa"
         dependsOn(":client:jsBrowserDistribution")
         doLast {
@@ -46,7 +46,7 @@ tasks {
         }
         finalizedBy("run")
     }
-    register("assembleSPA") {
+    register("assembleJs") {
         group = "spa"
         dependsOn(":client:jsBrowserDistribution")
         doLast {
@@ -59,3 +59,41 @@ tasks {
     }
 }
 // {platform.js.config}
+// {platform.wasmJs.config}
+tasks {
+    val resourcesMain by lazy { project.layout.buildDirectory.dir("resources/main").get().asFile }
+    register("runDevWasmJs") {
+        group = "spa"
+        dependsOn(":client:wasmJsBrowserDevelopmentExecutableDistribution")
+        doLast {
+            copy {
+                from(File(rootDir, "client/build/dist/wasmJs/developmentExecutable"))
+                into(resourcesMain)
+            }
+        }
+        finalizedBy("run")
+    }
+    register("runProdWasmJs") {
+        group = "spa"
+        dependsOn(":client:wasmJsBrowserDistribution")
+        doLast {
+            copy {
+                from(File(rootDir, "client/build/dist/wasmJs/productionExecutable"))
+                into(resourcesMain)
+            }
+        }
+        finalizedBy("run")
+    }
+    register("assembleWasmJs") {
+        group = "spa"
+        dependsOn(":client:wasmJsBrowserDistribution")
+        doLast {
+            copy {
+                from(File(rootDir, "client/build/dist/wasmJs/productionExecutable"))
+                into(resourcesMain)
+            }
+        }
+        finalizedBy("assemble")
+    }
+}
+// {platform.wasmJs.config}

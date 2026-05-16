@@ -1,25 +1,12 @@
 package shared.presentation.ui.container
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -29,7 +16,6 @@ import androidx.compose.ui.layout.onSizeChanged
 import shared.presentation.ui.component.DsSpacerDynamic
 import shared.presentation.ui.component.DsSpacerNavigationBar
 import shared.presentation.ui.component.DsSpacerStatusBar
-import shared.presentation.ui.component.DsVerticalScrollbarProvider
 import shared.presentation.ui.theme.DsTheme
 
 data class DsFixedHeaderFooterAppearance(
@@ -167,18 +153,15 @@ private fun ContentBlock(
     footerState: State<Int>,
     content: LazyListScope.() -> Unit
 ) {
-    DsVerticalScrollbarProvider { state ->
-        LazyColumn(
-            state = state,
-            modifier = Modifier
-                .fillMaxSize()
-                .background(appearance.backgroundColor)
-        ) {
-            if (headerState.value >= 0 && footerState.value >= 0) {
-                item { DsSpacerDynamic(heightState = headerState) }
-                content.invoke(this)
-                item { DsSpacerDynamic(heightState = footerState) }
-            }
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(appearance.backgroundColor)
+    ) {
+        if (headerState.value >= 0 && footerState.value >= 0) {
+            item { DsSpacerDynamic(heightState = headerState) }
+            content.invoke(this)
+            item { DsSpacerDynamic(heightState = footerState) }
         }
     }
 }

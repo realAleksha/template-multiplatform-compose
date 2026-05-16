@@ -1,11 +1,6 @@
 package shared.presentation.ui.component
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -15,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import app.cash.paging.LoadStateLoading
-import app.cash.paging.LoadStateNotLoading
-import app.cash.paging.PagingData
-import app.cash.paging.compose.collectAsLazyPagingItems
+import androidx.paging.LoadState.Loading
+import androidx.paging.LoadState.NotLoading
+import androidx.paging.PagingData
+import androidx.paging.compose.collectAsLazyPagingItems
 import kotlinx.coroutines.flow.Flow
 import shared.data.source.paging.Pager
 
@@ -54,32 +49,29 @@ fun <V : Any> DsPagingList(
     val pages = pager.pages() as? Flow<PagingData<V>>
     val items = pages?.collectAsLazyPagingItems()
 
-    DsVerticalScrollbarProvider { state ->
-        LazyColumn(
-            state = state,
-            modifier = modifier
-        ) {
-            val refreshState = items?.loadState?.refresh
-            when {
-                items == null -> {
-                    item { refreshContent() }
-                }
+    LazyColumn(
+        modifier = modifier
+    ) {
+        val refreshState = items?.loadState?.refresh
+        when {
+            items == null -> {
+                item { refreshContent() }
+            }
 
-                items.itemCount == 0 && refreshState is LoadStateLoading -> {
-                    item { refreshContent() }
-                }
+            items.itemCount == 0 && refreshState is Loading -> {
+                item { refreshContent() }
+            }
 
-                items.itemCount == 0 && refreshState is LoadStateNotLoading -> {
-                    item { emptyContent() }
-                }
+            items.itemCount == 0 && refreshState is NotLoading -> {
+                item { emptyContent() }
+            }
 
-                else -> {
-                    items(items.itemCount, key = itemKey?.let { { itemKey(it, items[it]) } }) { index ->
-                        itemContent(items[index])
-                    }
-                    if (items.loadState.append is LoadStateLoading) {
-                        item { appendContent() }
-                    }
+            else -> {
+                items(items.itemCount, key = itemKey?.let { { itemKey(it, items[it]) } }) { index ->
+                    itemContent(items[index])
+                }
+                if (items.loadState.append is Loading) {
+                    item { appendContent() }
                 }
             }
         }

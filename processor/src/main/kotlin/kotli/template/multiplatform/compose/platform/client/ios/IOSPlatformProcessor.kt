@@ -27,6 +27,10 @@ object IOSPlatformProcessor : PlatformProcessor() {
                 RemoveMarkedLine("client-darwin")
             )
         )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("iosArm64()"),
+            RemoveMarkedLine("iosSimulatorArm64()")
+        )
     }
-
 }

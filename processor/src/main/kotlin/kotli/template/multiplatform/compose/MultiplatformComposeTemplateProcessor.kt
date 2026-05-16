@@ -10,7 +10,6 @@ import kotli.engine.model.LayerTypes
 import kotli.engine.template.rule.RenamePackage
 import kotli.engine.template.rule.ReplaceMarkedText
 import kotli.template.multiplatform.compose.common.CommonProvider
-import kotli.template.multiplatform.compose.data.ai.AiProvider
 import kotli.template.multiplatform.compose.data.analytics.AnalyticsProvider
 import kotli.template.multiplatform.compose.data.cache.CacheProvider
 import kotli.template.multiplatform.compose.data.common.CommonDataProvider
@@ -104,7 +103,6 @@ object MultiplatformComposeTemplateProcessor : BaseTemplateProcessor() {
         HttpProvider,
         PagingProvider,
         AnalyticsProvider,
-        AiProvider,
 
         // UI Layer
         TextProvider,
@@ -222,7 +220,6 @@ object MultiplatformComposeTemplateProcessor : BaseTemplateProcessor() {
         renamePackage(state, "${Rules.ClientSrc}/iosArm64Main/kotlin")
         renamePackage(state, "${Rules.ClientSrc}/iosMain/kotlin")
         renamePackage(state, "${Rules.ClientSrc}/iosSimulatorArm64Main/kotlin")
-        renamePackage(state, "${Rules.ClientSrc}/iosX64Main/kotlin")
         renamePackage(state, "${Rules.ClientSrc}/jsMain/kotlin")
         renamePackage(state, "${Rules.ClientSrc}/jvmMain/kotlin")
         renamePackage(state, "${Rules.ClientSrc}/mobileAndDesktopMain/kotlin")

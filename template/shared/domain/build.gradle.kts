@@ -9,15 +9,19 @@ kotlin {
     androidTarget()
     // {platform.android.target}
     // {platform.ios.target}
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
     // {platform.ios.target}
     // {platform.js.target}
-    js(IR) {
+    js {
         browser()
     }
     // {platform.js.target}
+    // {platform.wasmJs.target}
+    wasmJs {
+        browser()
+    }
+    // {platform.wasmJs.target}
     // {platform.shared.domain}
     jvm()
     // {platform.shared.domain}

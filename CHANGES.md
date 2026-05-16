@@ -1,0 +1,5 @@
+- updated compose to the latest version
+- updated androidx room – is fully multiplatform now
+- removed cashapp paging – androidx paging now is fully multiplatform
+- removed settings multiplatform – androidx datastore now is fully multiplatform
+- added support for wasmJs target

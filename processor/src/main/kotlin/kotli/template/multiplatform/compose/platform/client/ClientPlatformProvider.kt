@@ -8,6 +8,7 @@ import kotli.template.multiplatform.compose.platform.client.android.AndroidPlatf
 import kotli.template.multiplatform.compose.platform.client.ios.IOSPlatformProcessor
 import kotli.template.multiplatform.compose.platform.client.js.JsPlatformProcessor
 import kotli.template.multiplatform.compose.platform.client.jvm.JvmPlatformProcessor
+import kotli.template.multiplatform.compose.platform.client.wasmJs.WasmJsPlatformProcessor
 
 object ClientPlatformProvider : BaseFeatureProvider() {
 
@@ -21,7 +22,9 @@ object ClientPlatformProvider : BaseFeatureProvider() {
         IOSPlatformProcessor,
         JvmPlatformProcessor,
         JsPlatformProcessor,
-        MobileAndDesktopProcessor
+        WasmJsPlatformProcessor,
+        MobileAndDesktopProcessor,
+        WebProcessor
     )
 
 }

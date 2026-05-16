@@ -1,1 +1,0 @@
-Multiplatform Paging Library

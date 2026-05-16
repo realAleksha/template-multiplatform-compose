@@ -33,7 +33,7 @@ object SqliteProcessor : BaseFeatureProcessor() {
         )
         state.onApplyRules(
             VersionCatalogRules(
-                RemoveMarkedLine("sqlite-bundled")
+                RemoveMarkedLine("androidx-sqlite")
             )
         )
     }

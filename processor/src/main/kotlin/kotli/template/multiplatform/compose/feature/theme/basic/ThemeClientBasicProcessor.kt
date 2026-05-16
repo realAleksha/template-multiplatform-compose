@@ -2,7 +2,6 @@ package kotli.template.multiplatform.compose.feature.theme.basic
 
 import kotli.engine.FeatureProcessor
 import kotli.template.multiplatform.compose.data.settings.datastore.DataStoreProcessor
-import kotli.template.multiplatform.compose.data.settings.multiplatform.MultiplatformSettingsProcessor
 import kotli.template.multiplatform.compose.feature.UserFeatureProcessor
 import kotli.template.multiplatform.compose.feature.theme.ThemeClientApiProcessor
 import kotlin.reflect.KClass
@@ -15,7 +14,6 @@ object ThemeClientBasicProcessor : UserFeatureProcessor() {
 
     override fun dependencies(): List<KClass<out FeatureProcessor>> = listOf(
         ThemeClientApiProcessor::class,
-        MultiplatformSettingsProcessor::class,
         DataStoreProcessor::class,
     )
 }

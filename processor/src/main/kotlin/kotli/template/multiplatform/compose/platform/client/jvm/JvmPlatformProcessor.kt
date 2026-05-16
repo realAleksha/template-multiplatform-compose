@@ -44,10 +44,13 @@ object JvmPlatformProcessor : PlatformProcessor() {
         state.onApplyRules(
             VersionCatalogRules(
                 RemoveMarkedLine("coroutines-swing"),
-                RemoveMarkedLine("compose-hot-reload"),
                 RemoveMarkedLine("client-java"),
                 RemoveMarkedLine("slf4j-simple")
             )
+        )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("jvm()")
         )
     }
 }

@@ -32,6 +32,10 @@ object CommonDataProcessor : BaseFeatureProcessor() {
                 RemoveMarkedLine("kotlin-test =")
             )
         )
+        state.onApplyRules(
+            Rules.ClientApplicationKt,
+            RemoveMarkedLine("AppHolder")
+        )
     }
 
 }

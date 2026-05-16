@@ -4,7 +4,6 @@ import kotli.engine.FeatureProcessor
 import kotli.template.multiplatform.compose.data.BaseDataProvider
 import kotli.template.multiplatform.compose.data.common.CommonDataProcessor
 import kotli.template.multiplatform.compose.data.paging.jetpack.JetpackPagingProcessor
-import kotli.template.multiplatform.compose.data.paging.multiplatform.MultiplatformPagingProcessor
 import kotlin.reflect.KClass
 
 object PagingProvider : BaseDataProvider() {
@@ -20,7 +19,6 @@ object PagingProvider : BaseDataProvider() {
 
     override fun createProcessors(): List<FeatureProcessor> = listOf(
         CommonPagingProcessor,
-        MultiplatformPagingProcessor,
         JetpackPagingProcessor
     )
 

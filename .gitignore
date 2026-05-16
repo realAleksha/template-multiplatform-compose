@@ -18,3 +18,4 @@ captures
 *.lock
 .kotlin
 *-lock.json
+/template/client/schemas

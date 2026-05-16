@@ -10,7 +10,6 @@ kotlin {
     applyDefaultHierarchyTemplate()
 
     androidTarget()
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
     js { browser() }
@@ -18,8 +17,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.foundation)
-            implementation(compose.components.resources)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.components.resources)
             implementation(projects.shared.presentation)
             implementation(projects.feature.common.client.api)
             implementation(projects.feature.analytics.client.api)

@@ -16,7 +16,6 @@ import kotli.template.multiplatform.compose.Tags
 import kotli.template.multiplatform.compose.common.CommonStatelyProcessor
 import kotli.template.multiplatform.compose.data.database.DatabaseCommonProcessor
 import kotli.template.multiplatform.compose.data.database.SqliteProcessor
-import kotli.template.multiplatform.compose.data.paging.multiplatform.MultiplatformPagingProcessor
 import kotli.template.multiplatform.compose.platform.client.MobileAndDesktopProcessor
 import kotlin.reflect.KClass
 import kotlin.time.Duration.Companion.hours
@@ -57,7 +56,6 @@ object SqlDelightProcessor : BaseFeatureProcessor() {
             Rules.ClientPlatformConfigKt,
             CleanupMarkedBlock("{data.database.sqldelight}")
         )
-        removePaging(state)
     }
 
     override fun doRemove(state: TemplateState) {
@@ -97,19 +95,4 @@ object SqlDelightProcessor : BaseFeatureProcessor() {
             RemoveMarkedLine("sql"),
         )
     }
-
-    private fun removePaging(state: TemplateState) {
-        if (state.getFeature(MultiplatformPagingProcessor.ID) != null) return
-
-        state.onApplyRules(
-            Rules.ClientBuildGradle,
-            RemoveMarkedLine("sqldelight.androidx.paging"),
-        )
-        state.onApplyRules(
-            VersionCatalogRules(
-                RemoveMarkedLine("sqldelight-androidx-paging")
-            )
-        )
-    }
-
 }

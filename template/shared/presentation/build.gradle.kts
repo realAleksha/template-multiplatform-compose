@@ -11,15 +11,19 @@ kotlin {
     androidTarget()
     // {platform.android.target}
     // {platform.ios.target}
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
     // {platform.ios.target}
     // {platform.js.target}
-    js(IR) {
+    js {
         browser()
     }
     // {platform.js.target}
+    // {platform.wasmJs.target}
+    wasmJs {
+        browser()
+    }
+    // {platform.wasmJs.target}
     // {platform.jvm.target}
     jvm()
     // {platform.jvm.target}
@@ -34,21 +38,20 @@ kotlin {
             }
         }
         commonMain.dependencies {
-            api(compose.foundation)
+            api(libs.compose.foundation)
             api(libs.kotlinx.coroutines.core)
             api(libs.kotlinx.serialization.json)
             api(libs.androidx.navigation.compose)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.components.resources)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(compose.material3)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor3)
             implementation(libs.filekit.compose)
             implementation(libs.markdown.renderer) // {userflow.component.markdown}
             implementation(libs.markdown.renderer.m3) // {userflow.component.markdown}
             implementation(libs.markdown.renderer.coil3) // {userflow.component.markdown}
-            implementation(libs.cashapp.paging.compose.common)
+            implementation(libs.androidx.paging.compose)
             implementation(projects.shared.data)
         }
         // {platform.android.dependencies}
@@ -63,23 +66,6 @@ kotlin {
             api(libs.kotlinx.coroutines.swing)
         }
         // {platform.jvm.dependencies}
-        // {platform.mobile_and_desktop.dependencies}
-        val mobileAndDesktopMain by creating {
-            dependsOn(commonMain.get())
-            dependencies {
-                implementation(libs.androidx.paging.compose)
-            }
-        }
-        androidMain.get().dependsOn(mobileAndDesktopMain) // {platform.android}
-//        iosMain.get().dependsOn(mobileAndDesktopMain) // {platform.ios}
-//        jvmMain.get().dependsOn(mobileAndDesktopMain) // {platform.jvm}
-        // {platform.mobile_and_desktop.dependencies}
-        val skikoMain by creating {
-            dependsOn(commonMain.get())
-        }
-        jsMain.get().dependsOn(skikoMain) // {platform.js}
-        jvmMain.get().dependsOn(skikoMain) // {platform.jvm}
-        nativeMain.get().dependsOn(skikoMain) // {platform.ios}
     }
 }
 

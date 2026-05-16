@@ -4,8 +4,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import kotli.common.data.source.supabase.SupabaseSource
 import org.koin.dsl.module
-import shared.data.source.ai.AiSource
-import shared.data.source.ai.gemini.GeminiAiSource
 import shared.data.source.analytics.AnalyticsSource
 import shared.data.source.analytics.BasicAnalyticsSource
 import shared.data.source.cache.BasicCacheSource
@@ -16,21 +14,20 @@ import shared.data.source.encryption.EncryptionSource
 import shared.data.source.encryption.korlibs.KorlibsEncryptionSource
 import shared.data.source.http.HttpSource
 import shared.data.source.paging.PagingSource
-import shared.data.source.paging.multiplatform.MultiplatformPagingSource
+import shared.data.source.paging.jetpack.JetpackPagingSource
 import shared.data.source.settings.SettingsSource
-import shared.data.source.settings.multiplatform.MultiplatformSettingsSource
+import shared.data.source.settings.datastore.DataStoreSource
 
 fun NavGraphBuilder.common(navController: NavHostController) {}
 
 val common = module {
     single { HttpSource() }
-    single<AiSource> { GeminiAiSource() }
     single<CacheSource> { BasicCacheSource() }
     single<ConfigSource> { BasicConfigSource() }
     single<AnalyticsSource> { BasicAnalyticsSource() }
-    single<PagingSource> { MultiplatformPagingSource() }
+    single<PagingSource> { JetpackPagingSource() }
     single<EncryptionSource> { KorlibsEncryptionSource() }
-    single<SettingsSource> { MultiplatformSettingsSource() }
+    single<SettingsSource> { DataStoreSource() }
     // {supabase}
     single<SupabaseSource> {
         SupabaseSource(

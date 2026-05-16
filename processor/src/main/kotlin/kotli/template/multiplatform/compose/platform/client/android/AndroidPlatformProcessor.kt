@@ -45,5 +45,9 @@ object AndroidPlatformProcessor : PlatformProcessor() {
                 RemoveMarkedLine("client-android")
             )
         )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("androidTarget()")
+        )
     }
 }

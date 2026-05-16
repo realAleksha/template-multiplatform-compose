@@ -14,7 +14,6 @@ import kotli.template.multiplatform.compose.platform.client.android.AndroidPlatf
 import kotli.template.multiplatform.compose.platform.client.jvm.JvmPlatformProcessor
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.RepeatedTest
 import org.slf4j.LoggerFactory
 import java.io.ByteArrayOutputStream
 import java.io.File

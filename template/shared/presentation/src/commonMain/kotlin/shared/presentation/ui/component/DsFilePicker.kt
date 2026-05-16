@@ -97,10 +97,10 @@ private fun getLauncher(
     maxFiles: Int = MAX_FILES,
     title: String? = null,
     type: FileKitType = FileKitType.File(),
-    mode: FileKitMode<List<PlatformFile>> = FileKitMode.Multiple(maxFiles),
+    mode: FileKitMode<List<PlatformFile>?, List<PlatformFile>?> = FileKitMode.Multiple(maxFiles),
     onResult: (files: List<DsFilePickerFile>) -> Unit
 ): DsFilePickerLauncher {
-    val launcher = rememberFilePickerLauncher(title = title, mode = mode, type = type) { files ->
+    val launcher = rememberFilePickerLauncher(mode = mode, type = type) { files ->
         val appFiles = files
             ?.take(maxFiles)
             ?.map { file -> file.toAppFile() } ?: emptyList()
