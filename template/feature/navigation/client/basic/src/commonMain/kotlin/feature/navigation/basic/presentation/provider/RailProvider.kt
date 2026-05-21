@@ -1,5 +1,6 @@
 package feature.navigation.basic.presentation.provider
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -16,6 +17,8 @@ internal fun RailProvider(
 ) {
     Row(modifier = Modifier.fillMaxSize()) {
         DsRailNavigation(state = state)
-        content()
+        Box(Modifier.weight(1f)) {
+            content()
+        }
     }
 }

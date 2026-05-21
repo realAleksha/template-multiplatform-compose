@@ -11,10 +11,10 @@ import feature.common.api.Feature
 import feature.common.api.FeatureContext
 import feature.common.koin.KoinFeatureProvider
 import feature.common.api.preview.FeatureMethod
-import feature.common.api.preview.FeaturePreviewProvider
-import feature.common.api.preview.method.MethodCallsAction
-import feature.common.api.preview.method.MethodChangesOption
-import feature.common.api.preview.method.MethodReturnsValue
+import feature.common.api.preview.FeaturePreview
+import feature.common.api.preview.MethodCallsAction
+import feature.common.api.preview.MethodChangesOption
+import feature.common.api.preview.MethodReturnsValue
 import feature.navigation.api.NavigationFeature
 import feature.navigation.api.NavigationItem
 import feature.navigation.api.NavigationType
@@ -29,7 +29,7 @@ import kotlin.reflect.KClass
 class BasicNavigationProvider(
     type: NavigationType = NavigationType.Adaptive,
     items: List<NavigationItem>? = null
-) : KoinFeatureProvider(), FeaturePreviewProvider, NavigationFeature {
+) : KoinFeatureProvider(), FeaturePreview, NavigationFeature {
 
     private val itemsState by lazy { mutableStateOf(items) }
     private val typeState by lazy { mutableStateOf(type) }

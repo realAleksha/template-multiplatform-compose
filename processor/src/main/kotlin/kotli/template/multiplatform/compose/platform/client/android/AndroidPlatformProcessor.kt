@@ -47,7 +47,7 @@ object AndroidPlatformProcessor : PlatformProcessor() {
         )
         state.onApplyRules(
             Rules.BuildGradle,
-            RemoveMarkedLine("androidTarget()")
+            RemoveMarkedLine("androidTarget()"),
         )
     }
 }

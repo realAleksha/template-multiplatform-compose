@@ -18,6 +18,9 @@ import feature.splash.api.SplashFeature
 import feature.splash.basic.BasicSplashProvider
 import feature.theme.api.ThemeFeature
 import feature.theme.basic.BasicThemeProvider
+import feature.update.api.UpdateFeature
+import feature.update.sideload.DefaultSideloadUpdateStateResolver
+import feature.update.sideload.SideloadUpdateProvider
 import kotli.app.presentation.AppMutableState
 import kotli.app.presentation.AppState
 import kotli.app.presentation.AppViewModel
@@ -63,6 +66,19 @@ val app = module {
     single<PaymentsFeature> { RevenueCatPaymentsProvider() }
     single<ThemeFeature> { BasicThemeProvider(get(), get()) }
     single<PasscodeFeature> { BasicPasscodeProvider(get(), get()) }
+    // {feature.update.client.sideload}
+    single<UpdateFeature> {
+        SideloadUpdateProvider(
+            httpSource = get(),
+            settingsSource = get(),
+            resolver = DefaultSideloadUpdateStateResolver(
+                metadataUrl = "https://example.com/update.json",
+                httpSource = get(),
+                currentVersionCode = 1
+            )
+        )
+    }
+    // {feature.update.client.sideload}
     single<AuthFeature>(SupabaseAuthProvider.qualifier) { SupabaseAuthProvider(get<SupabaseSource>().client) }
     single<AuthFeature>(StubAuthProvider.qualifier) { StubAuthProvider() }
     // {feature.common.client.api}
@@ -75,7 +91,8 @@ val app = module {
             get<NavigationFeature>(),
             get<AuthFeature>(StubAuthProvider.qualifier),
             get<AuthFeature>(SupabaseAuthProvider.qualifier),
-            get<PaymentsFeature>()
+            get<PaymentsFeature>(),
+            get<UpdateFeature>()
         )
     }
     // {feature.common.client.api}

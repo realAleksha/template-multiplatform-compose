@@ -5,11 +5,11 @@ import feature.common.api.Feature
 import feature.common.api.FeatureContext
 import feature.common.koin.KoinFeatureProvider
 import feature.common.api.preview.FeatureMethod
-import feature.common.api.preview.FeaturePreviewProvider
+import feature.common.api.preview.FeaturePreview
 import feature.payments.api.PaymentsFeature
 import kotlin.reflect.KClass
 
-class RevenueCatPaymentsProvider : KoinFeatureProvider(), FeaturePreviewProvider, PaymentsFeature {
+class RevenueCatPaymentsProvider : KoinFeatureProvider(), FeaturePreview, PaymentsFeature {
 
     override val name: String = "RevenueCat Payments"
 

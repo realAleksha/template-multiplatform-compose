@@ -2,6 +2,7 @@ package kotli.template.multiplatform.compose.feature.update
 
 import kotli.engine.FeatureProcessor
 import kotli.template.multiplatform.compose.feature.UserFeatureProvider
+import kotli.template.multiplatform.compose.feature.update.sideload.UpdateClientSideloadProcessor
 import kotli.template.multiplatform.compose.feature.update.stub.UpdateClientStubProcessor
 
 object UpdateFeatureProvider : UserFeatureProvider() {
@@ -10,6 +11,7 @@ object UpdateFeatureProvider : UserFeatureProvider() {
 
     override fun createProcessors(): List<FeatureProcessor> = listOf(
         UpdateClientApiProcessor,
-        UpdateClientStubProcessor
+        UpdateClientStubProcessor,
+        UpdateClientSideloadProcessor
     )
 }

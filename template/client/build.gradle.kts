@@ -103,6 +103,8 @@ kotlin {
             implementation(projects.feature.payments.client.revenuecat)
             implementation(projects.feature.navigation.client.api)
             implementation(projects.feature.navigation.client.basic)
+            implementation(projects.feature.update.client.api)
+            implementation(projects.feature.update.client.sideload)
         }
         // {platform.android.dependencies}
         androidMain.dependencies {

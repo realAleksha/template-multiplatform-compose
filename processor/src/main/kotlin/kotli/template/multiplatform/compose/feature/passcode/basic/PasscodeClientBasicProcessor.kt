@@ -11,7 +11,7 @@ object PasscodeClientBasicProcessor : UserFeatureProcessor() {
 
     override val moduleName: String = "feature:passcode:client:basic"
 
-    override val featureName: String = "BasicPasscodeProvider"
+    override val featureName: String = "BasicPasscode"
 
     override fun dependencies(): List<KClass<out FeatureProcessor>> = listOf(
         PasscodeClientApiProcessor::class,

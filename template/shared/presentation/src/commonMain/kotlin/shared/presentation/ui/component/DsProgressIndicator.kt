@@ -2,6 +2,7 @@ package shared.presentation.ui.component
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
@@ -21,6 +22,20 @@ fun DsCircularProgressIndicator(
         modifier = modifier
             .size(size),
         strokeWidth = 3.dp,
+        color = color
+    )
+}
+
+@Composable
+@NonRestartableComposable
+fun DsLinearProgressIndicator(
+    progress: Float,
+    modifier: Modifier = Modifier,
+    color: Color = ProgressIndicatorDefaults.linearColor,
+) {
+    LinearProgressIndicator(
+        progress = { progress },
+        modifier = modifier,
         color = color
     )
 }

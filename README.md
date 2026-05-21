@@ -21,6 +21,7 @@ All target platforms are optional and will be included only if selected during c
 - [Documentation](#documentation)
 - [Showcases](#showcases)
 - [How to use](#how-to-use)
+- [AI Guidelines](#ai-guidelines)
 - [Features](#features)
 
 # Overview
@@ -135,6 +136,13 @@ Once the project is downloaded, it includes the source code as well as a **READM
 - **Usage** - The main information related to using the feature. Use it as a starting point when you need to start working with the feature and don't know how to begin.
 
 For example, if you configured the project with **Web** and **iOS** platforms but don't know how to run the app on them (💀), find these platforms in the table and open their **Usage** guide.
+
+# AI Guidelines
+
+To help AI agents understand the project structure and guidelines, we have provided dedicated `AGENTS.md` files:
+- [Root AGENTS.md](AGENTS.md) - General repository structure and relationship between processor and template.
+- [Processor AGENTS.md](processor/AGENTS.md) - Guidelines for the template configuration engine.
+- [Template AGENTS.md](template/AGENTS.md) - Architectural rules and multiplatform conventions for the template itself.
 
 # Features
 

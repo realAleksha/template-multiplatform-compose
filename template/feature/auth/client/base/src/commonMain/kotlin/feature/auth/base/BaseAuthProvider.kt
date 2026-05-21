@@ -33,10 +33,10 @@ import feature.auth.base.userflow.presentation.basic.BasicAuthViewModel
 import feature.common.api.Feature
 import feature.common.api.FeatureContext
 import feature.common.api.preview.FeatureMethod
-import feature.common.api.preview.FeaturePreviewProvider
-import feature.common.api.preview.method.MethodCallsFlowAction
-import feature.common.api.preview.method.MethodReturnsFlow
-import feature.common.koin.KoinFeatureProvider
+import feature.common.api.preview.FeaturePreview
+import feature.common.api.preview.MethodCallsFlowAction
+import feature.common.api.preview.MethodReturnsFlow
+import feature.common.koin.KoinActionFeatureProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -54,7 +54,7 @@ import kotlin.time.Clock
 
 private val koinContext = MutableStateFlow<KoinApplication?>(null)
 
-abstract class BaseAuthProvider : KoinFeatureProvider(), FeaturePreviewProvider, AuthFeature {
+abstract class BaseAuthProvider : KoinActionFeatureProvider(), FeaturePreview, AuthFeature {
 
     private val startGoogleState by lazy { mutableStateOf<Long?>(null) }
 

@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.library) // {platform.android}
 }
 
 kotlin {
@@ -29,7 +29,9 @@ kotlin {
     }
 }
 
+// {platform.android.config}
 android {
     namespace = "feature.auth.supabase"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 }
+// {platform.android.config}

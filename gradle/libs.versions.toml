@@ -1,5 +1,5 @@
 [versions]
-kotli = "0.10.2"
+kotli = "0.11.0"
 kotlin = "1.9.23"
 kotlinxCoroutines = "1.8.1"
 logback = "1.5.6"

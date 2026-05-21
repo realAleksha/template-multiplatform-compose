@@ -30,7 +30,7 @@ object JsPlatformProcessor : PlatformProcessor() {
         )
         state.onApplyRules(
             Rules.BuildGradle,
-            RemoveMarkedLine("js { browser() }")
+            RemoveMarkedLine("js { browser() }", ignoreCase = false)
         )
     }
 

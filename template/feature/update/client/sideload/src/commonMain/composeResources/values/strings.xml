@@ -1,0 +1,16 @@
+<resources>
+    <string name="update_force_title">Update Required</string>
+    <string name="update_force_message">A mandatory update is available. Please download it to continue using the app.</string>
+    <string name="update_force_action">Download and Install</string>
+    <string name="update_downloading_progress">Downloading: %1$d%%</string>
+    <string name="update_available_title">Update Available</string>
+    <string name="update_available_message">A new version of the app is available. Would you like to update?</string>
+    <string name="update_available_confirm">Update</string>
+    <string name="update_available_dismiss">Later</string>
+    <string name="update_downloading_title">Downloading Update</string>
+    <string name="update_installing_title">Installing Update</string>
+    <string name="update_progress">Progress: %1$d%%</string>
+    <string name="update_error_title">Update Error</string>
+    <string name="update_error_ok">OK</string>
+    <string name="update_error_unknown">Unknown error</string>
+</resources>

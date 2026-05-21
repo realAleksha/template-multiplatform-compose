@@ -221,6 +221,7 @@ object MultiplatformComposeTemplateProcessor : BaseTemplateProcessor() {
         renamePackage(state, "${Rules.ClientSrc}/iosMain/kotlin")
         renamePackage(state, "${Rules.ClientSrc}/iosSimulatorArm64Main/kotlin")
         renamePackage(state, "${Rules.ClientSrc}/jsMain/kotlin")
+        renamePackage(state, "${Rules.ClientSrc}/wasmJsMain/kotlin")
         renamePackage(state, "${Rules.ClientSrc}/jvmMain/kotlin")
         renamePackage(state, "${Rules.ClientSrc}/mobileAndDesktopMain/kotlin")
         renamePackage(state, "${Rules.ServerSrc}/main/kotlin")

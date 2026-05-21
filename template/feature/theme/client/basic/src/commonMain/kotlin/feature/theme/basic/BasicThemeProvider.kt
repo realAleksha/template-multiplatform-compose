@@ -7,11 +7,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import feature.common.api.Feature
 import feature.common.api.FeatureContext
-import feature.common.koin.KoinFeatureProvider
 import feature.common.api.preview.FeatureMethod
-import feature.common.api.preview.FeaturePreviewProvider
-import feature.common.api.preview.method.MethodCallsAction
-import feature.common.api.preview.method.MethodComposable
+import feature.common.api.preview.FeaturePreview
+import feature.common.api.preview.MethodCallsAction
+import feature.common.api.preview.MethodComposable
+import feature.common.koin.KoinActionFeatureProvider
 import feature.theme.api.ThemeFeature
 import feature.theme.basic.change.presentation.ChangeThemeBottomSheet
 import feature.theme.basic.change.presentation.ChangeThemeBottomSheetRoute
@@ -39,7 +39,7 @@ import kotlin.reflect.KClass
 class BasicThemeProvider(
     private val themeState: ThemeState,
     private val settingsSource: SettingsSource
-) : KoinFeatureProvider(), FeaturePreviewProvider, ThemeFeature {
+) : KoinActionFeatureProvider(), FeaturePreview, ThemeFeature {
 
     override val name: String = "Basic Theme"
 

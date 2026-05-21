@@ -15,8 +15,8 @@ import feature.common.api.Feature
 import feature.common.api.FeatureContext
 import feature.common.koin.KoinFeatureProvider
 import feature.common.api.preview.FeatureMethod
-import feature.common.api.preview.FeaturePreviewProvider
-import feature.common.api.preview.method.MethodCallsAction
+import feature.common.api.preview.FeaturePreview
+import feature.common.api.preview.MethodCallsAction
 import feature.splash.api.SplashFeature
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +28,7 @@ import kotlin.reflect.KClass
 
 class BasicSplashProvider(
     show: Boolean = true
-) : KoinFeatureProvider(), FeaturePreviewProvider, SplashFeature {
+) : KoinFeatureProvider(), FeaturePreview, SplashFeature {
 
     private val previewScope by lazy { CoroutineScope(SupervisorJob() + Dispatchers.Default) }
     private val visibleState by lazy { mutableStateOf(show) }

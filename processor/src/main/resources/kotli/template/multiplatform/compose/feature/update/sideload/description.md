@@ -1,0 +1,1 @@
+The `Sideload Update` feature provides functionality to update the app via sideloading. It allows downloading and installing new versions of the application directly from a remote source, without going through an app store.

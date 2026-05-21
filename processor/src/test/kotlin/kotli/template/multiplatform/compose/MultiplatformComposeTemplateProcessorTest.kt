@@ -11,7 +11,9 @@ import kotli.engine.generator.ZipOutputGenerator
 import kotli.engine.model.Feature
 import kotli.engine.model.Layer
 import kotli.template.multiplatform.compose.platform.client.android.AndroidPlatformProcessor
+import kotli.template.multiplatform.compose.platform.client.js.JsPlatformProcessor
 import kotli.template.multiplatform.compose.platform.client.jvm.JvmPlatformProcessor
+import kotli.template.multiplatform.compose.platform.client.wasmJs.WasmJsPlatformProcessor
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions
 import org.slf4j.LoggerFactory
@@ -41,6 +43,12 @@ class MultiplatformComposeTemplateProcessorTest {
         }
         features.find { it.id == JvmPlatformProcessor.ID }?.let {
             commands.add(arrayOf("packageDistributionForCurrentOS"))
+        }
+        features.find { it.id == WasmJsPlatformProcessor.ID }?.let {
+            commands.add(arrayOf("kotlinWasmUpgradeYarnLock", "wasmJsBrowserDistribution"))
+        }
+        features.find { it.id == JsPlatformProcessor.ID }?.let {
+            commands.add(arrayOf("kotlinUpgradeYarnLock", "jsBrowserDistribution"))
         }
         return commands.first()
     }
@@ -115,7 +123,7 @@ class MultiplatformComposeTemplateProcessorTest {
                 namespace = "my.app",
                 name = "myApp",
                 features = listOf(
-                    Feature(AndroidPlatformProcessor.ID)
+                    Feature(AndroidPlatformProcessor.ID),
                 )
             )
             val generator = PathOutputGenerator(buildPath(), registry)

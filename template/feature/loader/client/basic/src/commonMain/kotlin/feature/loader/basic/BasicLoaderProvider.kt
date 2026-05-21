@@ -5,8 +5,8 @@ import feature.common.api.Feature
 import feature.common.api.FeatureContext
 import feature.common.koin.KoinFeatureProvider
 import feature.common.api.preview.FeatureMethod
-import feature.common.api.preview.FeaturePreviewProvider
-import feature.common.api.preview.method.MethodCallsAction
+import feature.common.api.preview.FeaturePreview
+import feature.common.api.preview.MethodCallsAction
 import feature.loader.api.LoaderFeature
 import kotlinx.coroutines.delay
 import shared.presentation.state.MutableViewState
@@ -15,7 +15,7 @@ import shared.presentation.state.ViewStateHandler
 import shared.presentation.state.tryCatch
 import kotlin.reflect.KClass
 
-class BasicLoaderProvider : KoinFeatureProvider(), FeaturePreviewProvider, LoaderFeature {
+class BasicLoaderProvider : KoinFeatureProvider(), FeaturePreview, LoaderFeature {
 
     override val name: String = "Basic Loader"
 

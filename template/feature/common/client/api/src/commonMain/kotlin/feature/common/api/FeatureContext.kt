@@ -6,6 +6,12 @@ import kotlinx.coroutines.flow.Flow
 @Stable
 interface FeatureContext {
 
+    val debug: Boolean
+
+    val features: List<Feature>
+
+    fun getCurrentBackStackChanges(): Flow<List<Int>>
+
     fun getCurrentDestinationChanges(): Flow<Int>
 
     fun getDestinationId(route: Any): Int

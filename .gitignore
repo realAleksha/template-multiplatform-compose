@@ -19,3 +19,4 @@ captures
 .kotlin
 *-lock.json
 /template/client/schemas
+.output.txt

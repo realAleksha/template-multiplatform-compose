@@ -7,10 +7,10 @@ import androidx.navigation.compose.dialog
 import feature.common.api.Feature
 import feature.common.api.FeatureContext
 import feature.common.api.preview.FeatureMethod
-import feature.common.api.preview.FeaturePreviewProvider
-import feature.common.api.preview.method.MethodCallsFlowAction
-import feature.common.api.preview.method.MethodReturnsSuspendValue
-import feature.common.koin.KoinFeatureProvider
+import feature.common.api.preview.FeaturePreview
+import feature.common.api.preview.MethodCallsFlowAction
+import feature.common.api.preview.MethodReturnsSuspendValue
+import feature.common.koin.KoinActionFeatureProvider
 import feature.passcode.api.PasscodeFeature
 import feature.passcode.basic.data.PasscodeRepositoryImpl
 import feature.passcode.basic.domain.repository.PasscodeRepository
@@ -52,9 +52,9 @@ class BasicPasscodeProvider(
     private val passcodeLength: Int = 4,
     private val unlockAttemptsCount: Int = 5,
     private val persistentKey: String = "passcode_config",
-    private val resumeTimeout: Long = 3.seconds.inWholeMilliseconds,
+    private val resumeTimeout: Long = 60.seconds.inWholeMilliseconds,
     private val encryptionMethod: (code: String) -> EncryptionMethod = EncryptionMethod::PBKDF2,
-) : KoinFeatureProvider(), FeaturePreviewProvider, PasscodeFeature {
+) : KoinActionFeatureProvider(), FeaturePreview, PasscodeFeature {
 
     override val name: String = "Basic Passcode"
 
@@ -110,6 +110,7 @@ class BasicPasscodeProvider(
         }
         singleOf(::settingsSource)
         singleOf(::encryptionSource)
+
         factoryOf(::ForgotPasscodeUseCase)
         factoryOf(::GetPasscodeLengthUseCase)
         factoryOf(::GetLockStateUseCase)
