@@ -30,6 +30,11 @@ logback = "1.5.18"
 markdown-renderer = "0.40.2"
 multiplatform-expressions-evaluator = "2.0.0"
 napier = "2.7.1"
+lexilabs-basic-ads = "1.1.1"
+play-services-ads = "23.6.0"
+user-messaging-platform = "3.1.0"
+cocoapods-admob = "11.13.0"
+cocoapods-ump = "2.1.0"
 purchases-kmp = "1.8.5+13.38.1"
 slf4j-simple = "2.0.17"
 sqldelight = "2.3.2"
@@ -89,6 +94,9 @@ markdown-renderer = { module = "com.mikepenz:multiplatform-markdown-renderer", v
 markdown-renderer-m3 = { module = "com.mikepenz:multiplatform-markdown-renderer-m3", version.ref = "markdown-renderer" }
 markdown-renderer-coil3 = { module = "com.mikepenz:multiplatform-markdown-renderer-coil3", version.ref = "markdown-renderer" }
 multiplatform-expressions-evaluator = { module = "io.github.murzagalin:multiplatform-expressions-evaluator", version.ref = "multiplatform-expressions-evaluator" }
+lexilabs-basic-ads = { module = "app.lexilabs.basic:basic-ads", version.ref = "lexilabs-basic-ads" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "play-services-ads" }
+user-messaging-platform = { module = "com.google.android.ump:user-messaging-platform", version.ref = "user-messaging-platform" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 purchases-core = { module = "com.revenuecat.purchases:purchases-kmp-core", version.ref = "purchases-kmp" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j-simple" }

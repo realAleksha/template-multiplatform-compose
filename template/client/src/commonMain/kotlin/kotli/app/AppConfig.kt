@@ -2,6 +2,8 @@ package kotli.app
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import feature.ads.admob.AdMobAdsProvider
+import feature.ads.api.AdsFeature
 import feature.auth.api.AuthFeature
 import feature.auth.stub.StubAuthProvider
 import feature.auth.supabase.SupabaseAuthProvider
@@ -66,6 +68,7 @@ val app = module {
     single<PaymentsFeature> { RevenueCatPaymentsProvider() }
     single<ThemeFeature> { BasicThemeProvider(get(), get()) }
     single<PasscodeFeature> { BasicPasscodeProvider(get(), get()) }
+    single<AdsFeature> { AdMobAdsProvider() }
     // {feature.update.client.sideload}
     single<UpdateFeature> {
         SideloadUpdateProvider(
@@ -92,7 +95,8 @@ val app = module {
             get<AuthFeature>(StubAuthProvider.qualifier),
             get<AuthFeature>(SupabaseAuthProvider.qualifier),
             get<PaymentsFeature>(),
-            get<UpdateFeature>()
+            get<UpdateFeature>(),
+            get<AdsFeature>()
         )
     }
     // {feature.common.client.api}

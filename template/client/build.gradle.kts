@@ -1,4 +1,14 @@
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag // {platform.jvm}
+import javax.xml.parsers.DocumentBuilderFactory // {platform.ios}
+import javax.xml.transform.TransformerFactory // {platform.ios}
+import javax.xml.transform.dom.DOMSource // {platform.ios}
+import javax.xml.transform.stream.StreamResult // {platform.ios}
+import javax.xml.transform.OutputKeys // {platform.ios}
+import org.w3c.dom.Element // {platform.ios}
+import org.w3c.dom.Document // {platform.ios}
+import org.w3c.dom.NodeList // {platform.ios}
+import org.w3c.dom.Node // {platform.ios}
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlinx.serialization)
@@ -105,6 +115,9 @@ kotlin {
             implementation(projects.feature.navigation.client.basic)
             implementation(projects.feature.update.client.api)
             implementation(projects.feature.update.client.sideload)
+            implementation(projects.feature.ads.client.api) // {feature.ads.client.api}
+            implementation(projects.feature.ads.client.admob) // {feature.ads.client.admob}
+            implementation(projects.feature.ads.client.stub) // {feature.ads.client.stub}
         }
         // {platform.android.dependencies}
         androidMain.dependencies {
@@ -255,3 +268,134 @@ sqldelight {
     }
 }
 // {sqldelight.config}
+// {platform.ios.config}
+tasks.register("mergeIosInfoPlist") {
+    group = "ios"
+    description = "Merge Info.plist from feature modules into the main iosApp Info.plist"
+
+    val mainInfoPlist = file("iosApp/iosApp/Info.plist")
+    val outputInfoPlist = layout.buildDirectory.file("ios/Info.plist")
+
+    inputs.file(mainInfoPlist)
+    outputs.file(outputInfoPlist)
+
+    val featurePlists = objects.fileCollection()
+    val dependencyConfigs = listOf("commonMainImplementation", "iosMainImplementation")
+    dependencyConfigs.forEach { configName ->
+        configurations.matching { it.name == configName }.all {
+            dependencies.filterIsInstance<ProjectDependency>().forEach { dep ->
+                val dependencyProject = rootProject.project(dep.path)
+                val plist = dependencyProject.file("src/iosMain/Info.plist")
+                if (plist.exists()) {
+                    featurePlists.from(plist)
+                }
+            }
+        }
+    }
+    inputs.files(featurePlists)
+
+    doLast {
+        if (!mainInfoPlist.exists()) return@doLast
+
+        val dbf = DocumentBuilderFactory.newInstance()
+        dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
+        val db = dbf.newDocumentBuilder()
+
+        val doc = db.parse(mainInfoPlist)
+        val dict = doc.getElementsByTagName("dict").item(0) as Element
+
+        featurePlists.files.forEach { featureFile ->
+            val featureDoc = db.parse(featureFile)
+            val featureDict = featureDoc.getElementsByTagName("dict").item(0) as Element
+            mergeDicts(doc, dict, featureDict)
+        }
+
+        removeWhitespaceNodes(doc)
+
+        outputInfoPlist.get().asFile.parentFile.mkdirs()
+        val transformer = TransformerFactory.newInstance().newTransformer()
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes")
+        transformer.setOutputProperty(OutputKeys.METHOD, "xml")
+        transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "-//Apple//DTD PLIST 1.0//EN")
+        transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "http://www.apple.com/DTDs/PropertyList-1.0.dtd")
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2")
+
+        val source = DOMSource(doc)
+        val result = StreamResult(outputInfoPlist.get().asFile)
+        transformer.transform(source, result)
+    }
+}
+
+tasks.matching { it.name.startsWith("embedAndSign") }.configureEach {
+    dependsOn("mergeIosInfoPlist")
+}
+
+fun removeWhitespaceNodes(node: Node) {
+    val children = node.childNodes
+    for (i in children.length - 1 downTo 0) {
+        val child = children.item(i)
+
+        if (child.nodeType == Node.TEXT_NODE && child.textContent.isBlank()) {
+            node.removeChild(child)
+        } else {
+            removeWhitespaceNodes(child)
+        }
+    }
+}
+
+fun mergeDicts(doc: Document, mainDict: Element, featureDict: Element) {
+    val featureNodes = featureDict.childNodes
+    for (i in 0 until featureNodes.length) {
+        val node = featureNodes.item(i)
+        if (node is Element && node.tagName == "key") {
+            val key = node.textContent.trim()
+            val featureValue = findNextElement(featureNodes, i + 1)
+            if (featureValue != null) {
+                mergeEntry(doc, mainDict, key, featureValue)
+            }
+        }
+    }
+}
+
+fun mergeEntry(doc: Document, mainDict: Element, key: String, featureValue: Element) {
+    val mainNodes = mainDict.childNodes
+    var keyNode: Element? = null
+    var valueNode: Element? = null
+
+    for (i in 0 until mainNodes.length) {
+        val node = mainNodes.item(i)
+        if (node is Element && node.tagName == "key" && node.textContent.trim() == key) {
+            keyNode = node
+            valueNode = findNextElement(mainNodes, i + 1)
+            break
+        }
+    }
+
+    if (keyNode == null) {
+        val newKey = doc.createElement("key")
+        newKey.textContent = key
+        mainDict.appendChild(newKey)
+        mainDict.appendChild(doc.importNode(featureValue, true))
+    } else if (valueNode != null) {
+        if (valueNode.tagName == "array" && featureValue.tagName == "array") {
+            val featureItems = featureValue.childNodes
+            for (i in 0 until featureItems.length) {
+                val item = featureItems.item(i)
+                if (item is Element) {
+                    valueNode.appendChild(doc.importNode(item, true))
+                }
+            }
+        } else {
+            mainDict.replaceChild(doc.importNode(featureValue, true), valueNode)
+        }
+    }
+}
+
+fun findNextElement(nodes: NodeList, startIndex: Int): Element? {
+    for (i in startIndex until nodes.length) {
+        val node = nodes.item(i)
+        if (node is Element) return node
+    }
+    return null
+}
+// {platform.ios.config}
