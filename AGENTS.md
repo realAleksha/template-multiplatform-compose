@@ -23,3 +23,22 @@ The `processor` module treats the `template` directory as raw data. When a proje
 - **Changes in `template`** must be accompanied by appropriate markers so the `processor` can handle them (e.g., if you add a new dependency, wrap it in platform/feature markers).
 - **Changes in `processor`** usually involve adding new `FeatureProvider` or `FeatureProcessor` implementations to support new capabilities in the template.
 - **Never modify the `template`** without considering how it affects the generation process in the `processor`.
+
+## Adding a New Feature
+
+When adding a new feature (e.g., `feature:update:client:store`):
+
+1.  **Template Module**:
+    - Create the module directory in `template/feature/...`.
+    - Add `build.gradle.kts`. Use `alias(libs.plugins...)` for plugins and `projects.shared...` for internal dependencies.
+    - Use `expect`/`actual` for platform-specific logic.
+    - Register the module in `template/settings.gradle.kts`.
+2.  **Processor**:
+    - Create a `FeatureProcessor` (usually extending `UserFeatureProcessor`) in the `processor` module.
+    - Set `moduleName` to the path of the template module (e.g., `feature:update:client:store`).
+    - Register the processor in the corresponding `FeatureProvider`.
+3.  **Documentation**:
+    - Create documentation files in `processor/src/main/resources/.../<feature_name>/`:
+        - `title.md`: Short name of the feature.
+        - `description.md`: Brief overview of what the feature does.
+        - `usage.md`: Detailed instructions on how to install and use the feature in the generated app.

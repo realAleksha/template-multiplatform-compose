@@ -115,6 +115,7 @@ kotlin {
             implementation(projects.feature.navigation.client.basic)
             implementation(projects.feature.update.client.api)
             implementation(projects.feature.update.client.sideload)
+            implementation(projects.feature.update.client.store) // {feature.update.client.store}
             implementation(projects.feature.ads.client.api) // {feature.ads.client.api}
             implementation(projects.feature.ads.client.admob) // {feature.ads.client.admob}
             implementation(projects.feature.ads.client.stub) // {feature.ads.client.stub}

@@ -23,6 +23,7 @@ import feature.theme.basic.BasicThemeProvider
 import feature.update.api.UpdateFeature
 import feature.update.sideload.DefaultSideloadUpdateStateResolver
 import feature.update.sideload.SideloadUpdateProvider
+import feature.update.store.StoreUpdateProvider
 import kotli.app.presentation.AppMutableState
 import kotli.app.presentation.AppState
 import kotli.app.presentation.AppViewModel
@@ -82,6 +83,9 @@ val app = module {
         )
     }
     // {feature.update.client.sideload}
+    // {feature.update.client.store}
+    single<UpdateFeature> { StoreUpdateProvider() }
+    // {feature.update.client.store}
     single<AuthFeature>(SupabaseAuthProvider.qualifier) { SupabaseAuthProvider(get<SupabaseSource>().client) }
     single<AuthFeature>(StubAuthProvider.qualifier) { StubAuthProvider() }
     // {feature.common.client.api}

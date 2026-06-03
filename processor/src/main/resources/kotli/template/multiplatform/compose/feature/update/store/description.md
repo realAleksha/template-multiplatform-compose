@@ -1,0 +1,1 @@
+The `Store Update` feature provides functionality to update the app via official stores (Google Play, App Store, etc.). It redirects users to the store page of the application to perform the update.

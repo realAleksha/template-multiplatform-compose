@@ -32,6 +32,7 @@ multiplatform-expressions-evaluator = "2.0.0"
 napier = "2.7.1"
 lexilabs-basic-ads = "1.1.1"
 play-services-ads = "23.6.0"
+google-play-app-update = "2.1.0"
 user-messaging-platform = "3.1.0"
 cocoapods-admob = "11.13.0"
 cocoapods-ump = "2.1.0"
@@ -96,6 +97,8 @@ markdown-renderer-coil3 = { module = "com.mikepenz:multiplatform-markdown-render
 multiplatform-expressions-evaluator = { module = "io.github.murzagalin:multiplatform-expressions-evaluator", version.ref = "multiplatform-expressions-evaluator" }
 lexilabs-basic-ads = { module = "app.lexilabs.basic:basic-ads", version.ref = "lexilabs-basic-ads" }
 play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "play-services-ads" }
+google-play-app-update = { module = "com.google.android.play:app-update", version.ref = "google-play-app-update" }
+google-play-app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "google-play-app-update" }
 user-messaging-platform = { module = "com.google.android.ump:user-messaging-platform", version.ref = "user-messaging-platform" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 purchases-core = { module = "com.revenuecat.purchases:purchases-kmp-core", version.ref = "purchases-kmp" }
