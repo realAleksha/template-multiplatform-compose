@@ -22,9 +22,9 @@ kotlin {
             implementation(libs.supabase.compose.auth)
             implementation(projects.feature.common.client.api)
             implementation(projects.feature.common.client.koin)
+            implementation(libs.koin.compose.viewmodel.navigation)
             implementation(projects.feature.auth.client.api)
             implementation(projects.feature.auth.client.base)
-            implementation(libs.koin.compose.viewmodel.navigation)
         }
     }
 }

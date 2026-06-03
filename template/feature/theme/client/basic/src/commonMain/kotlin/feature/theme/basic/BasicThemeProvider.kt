@@ -6,7 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import feature.common.api.Feature
-import feature.common.api.FeatureContext
+import feature.common.api.FeatureNavContext
 import feature.common.api.preview.FeatureMethod
 import feature.common.api.preview.FeaturePreview
 import feature.common.api.preview.MethodCallsAction
@@ -98,13 +98,13 @@ class BasicThemeProvider(
     }
 
     @Composable
-    override fun onProvideContent(context: FeatureContext, content: @Composable (() -> Unit)) {
+    override fun onProvideContent(context: FeatureNavContext, content: @Composable (() -> Unit)) {
         withDI {
             ThemeProvider(content)
         }
     }
 
-    override suspend fun onReceiveAction(action: Action, context: FeatureContext) {
+    override suspend fun onReceiveAction(action: Action, context: FeatureNavContext) {
         when (action) {
             ChangeThemeScreen -> context.pushDestination(ChangeThemeRoute)
             ChangeThemeDialog -> context.pushDestination(ChangeThemeDialogRoute)
@@ -112,7 +112,7 @@ class BasicThemeProvider(
         }
     }
 
-    override fun onProvideNavigation(context: FeatureContext, builder: NavGraphBuilder) =
+    override fun onProvideNavigation(context: FeatureNavContext, builder: NavGraphBuilder) =
         builder.run {
             dialog<ChangeThemeBottomSheetRoute> {
                 withDI {

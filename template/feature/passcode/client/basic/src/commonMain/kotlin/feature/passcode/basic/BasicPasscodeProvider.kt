@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import feature.common.api.Feature
-import feature.common.api.FeatureContext
+import feature.common.api.FeatureNavContext
 import feature.common.api.preview.FeatureMethod
 import feature.common.api.preview.FeaturePreview
 import feature.common.api.preview.MethodCallsFlowAction
@@ -129,7 +129,7 @@ class BasicPasscodeProvider(
         viewModelOf(::UnlockPasscodeViewModel)
     }
 
-    override suspend fun onReceiveAction(action: Action, context: FeatureContext) {
+    override suspend fun onReceiveAction(action: Action, context: FeatureNavContext) {
         when (action) {
             SetPasscode -> context.restoreDestination(SetPasscodeRoute)
             ResetPasscode -> context.restoreDestination(ResetPasscodeRoute)
@@ -138,13 +138,13 @@ class BasicPasscodeProvider(
     }
 
     @Composable
-    override fun onProvideContent(context: FeatureContext, content: @Composable (() -> Unit)) {
+    override fun onProvideContent(context: FeatureNavContext, content: @Composable (() -> Unit)) {
         withDI {
             PasscodeProvider(content)
         }
     }
 
-    override fun onProvideNavigation(context: FeatureContext, builder: NavGraphBuilder) =
+    override fun onProvideNavigation(context: FeatureNavContext, builder: NavGraphBuilder) =
         builder.run {
             composable<SetPasscodeRoute> {
                 withDI {

@@ -6,7 +6,7 @@ import androidx.navigation.NavGraphBuilder
 interface FeatureProvider : Feature {
 
     @Composable
-    fun provideContent(context: FeatureContext, content: @Composable (() -> Unit))
+    fun provideContent(context: FeatureNavContext, content: @Composable (() -> Unit))
 
-    fun provideNavigation(context: FeatureContext, builder: NavGraphBuilder)
+    fun provideNavigation(context: FeatureNavContext, builder: NavGraphBuilder)
 }

@@ -31,7 +31,7 @@ import feature.auth.base.userflow.presentation.basic.BasicAuthRoute
 import feature.auth.base.userflow.presentation.basic.BasicAuthScreen
 import feature.auth.base.userflow.presentation.basic.BasicAuthViewModel
 import feature.common.api.Feature
-import feature.common.api.FeatureContext
+import feature.common.api.FeatureNavContext
 import feature.common.api.preview.FeatureMethod
 import feature.common.api.preview.FeaturePreview
 import feature.common.api.preview.MethodCallsFlowAction
@@ -125,7 +125,7 @@ abstract class BaseAuthProvider : KoinActionFeatureProvider(), FeaturePreview, A
         viewModelOf(::BasicAuthViewModel)
     }
 
-    override suspend fun onReceiveAction(action: Action, context: FeatureContext) {
+    override suspend fun onReceiveAction(action: Action, context: FeatureNavContext) {
         koinContext.value = koinApp
         when (action) {
             is StartSignOutFlow -> context.restoreDestination(SignOutRoute)
@@ -136,12 +136,12 @@ abstract class BaseAuthProvider : KoinActionFeatureProvider(), FeaturePreview, A
     }
 
     @Composable
-    final override fun onProvideContent(context: FeatureContext, content: @Composable (() -> Unit)) {
+    final override fun onProvideContent(context: FeatureNavContext, content: @Composable (() -> Unit)) {
         monitorGoogleAuth()
         content()
     }
 
-    override fun onProvideNavigation(context: FeatureContext, builder: NavGraphBuilder) = builder.run {
+    override fun onProvideNavigation(context: FeatureNavContext, builder: NavGraphBuilder) = builder.run {
         // sign in -> email
         composable<SignInWithEmailRoute.Start> {
             withDI(koinContext.value) {

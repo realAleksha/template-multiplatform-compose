@@ -6,16 +6,16 @@ import androidx.navigation.NavGraphBuilder
 abstract class BaseFeatureProvider : FeatureProvider {
 
     @Composable
-    override fun provideContent(context: FeatureContext, content: @Composable (() -> Unit)) {
+    override fun provideContent(context: FeatureNavContext, content: @Composable (() -> Unit)) {
         onProvideContent(context, content)
     }
 
     @Composable
-    abstract fun onProvideContent(context: FeatureContext, content: @Composable () -> Unit)
+    abstract fun onProvideContent(context: FeatureNavContext, content: @Composable () -> Unit)
 
-    override fun provideNavigation(context: FeatureContext, builder: NavGraphBuilder) {
+    override fun provideNavigation(context: FeatureNavContext, builder: NavGraphBuilder) {
         onProvideNavigation(context, builder)
     }
 
-    open fun onProvideNavigation(context: FeatureContext, builder: NavGraphBuilder) = Unit
+    open fun onProvideNavigation(context: FeatureNavContext, builder: NavGraphBuilder) = Unit
 }

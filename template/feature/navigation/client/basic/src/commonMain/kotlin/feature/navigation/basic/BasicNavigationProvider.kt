@@ -8,7 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.snapshots.Snapshot
 import feature.common.api.Feature
-import feature.common.api.FeatureContext
+import feature.common.api.FeatureNavContext
 import feature.common.koin.KoinFeatureProvider
 import feature.common.api.preview.FeatureMethod
 import feature.common.api.preview.FeaturePreview
@@ -81,7 +81,7 @@ class BasicNavigationProvider(
     }
 
     @Composable
-    override fun onProvideContent(context: FeatureContext, content: @Composable (() -> Unit)) {
+    override fun onProvideContent(context: FeatureNavContext, content: @Composable (() -> Unit)) {
         LaunchedEffect(context) {
             snapshotFlow { itemsState.value }
                 .filterNotNull()
@@ -109,7 +109,7 @@ class BasicNavigationProvider(
         }
     }
 
-    private fun map(context: FeatureContext, item: NavigationItem, onRoute: (Any) -> Unit) =
+    private fun map(context: FeatureNavContext, item: NavigationItem, onRoute: (Any) -> Unit) =
         DsNavigationItem(
             label = item.label,
             enabled = item.enabled,

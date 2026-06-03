@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import feature.common.api.Feature
-import feature.common.api.FeatureContext
+import feature.common.api.FeatureNavContext
 import feature.common.koin.KoinFeatureProvider
 import feature.common.api.preview.FeatureMethod
 import feature.common.api.preview.FeaturePreview
@@ -49,7 +49,7 @@ class BasicSplashProvider(
 
     @Composable
     override fun onProvideContent(
-        context: FeatureContext,
+        context: FeatureNavContext,
         content: @Composable (() -> Unit)
     ) {
         content()

@@ -6,7 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.dialog
 import androidx.navigation.toRoute
 import feature.common.api.Feature
-import feature.common.api.FeatureContext
+import feature.common.api.FeatureNavContext
 import feature.common.api.preview.FeatureMethod
 import feature.common.api.preview.FeaturePreview
 import feature.common.api.preview.MethodCallsAction
@@ -96,7 +96,7 @@ class SideloadUpdateProvider(
         viewModelOf(::UpdateErrorViewModel)
     }
 
-    override suspend fun onReceiveAction(action: Action, context: FeatureContext) {
+    override suspend fun onReceiveAction(action: Action, context: FeatureNavContext) {
         when (action) {
             CheckForUpdates -> context.pushDestination(UpdateCheckRoute)
             is StateAction -> handleState(action.state, context)
@@ -104,7 +104,7 @@ class SideloadUpdateProvider(
     }
 
     @Composable
-    override fun onProvideContent(context: FeatureContext, content: @Composable (() -> Unit)) {
+    override fun onProvideContent(context: FeatureNavContext, content: @Composable (() -> Unit)) {
         withDI {
             content()
             LaunchedEffect(Unit) {
@@ -117,7 +117,7 @@ class SideloadUpdateProvider(
         }
     }
 
-    override fun onProvideNavigation(context: FeatureContext, builder: NavGraphBuilder) {
+    override fun onProvideNavigation(context: FeatureNavContext, builder: NavGraphBuilder) {
         builder.run {
             dialog<ForceUpdateRoute> { backStackEntry ->
                 withDI {
@@ -160,7 +160,7 @@ class SideloadUpdateProvider(
         onSendAction(CheckForUpdates)
     }
 
-    private fun handleState(state: SideloadUpdateState, context: FeatureContext) {
+    private fun handleState(state: SideloadUpdateState, context: FeatureNavContext) {
         when (state) {
             is SideloadUpdateState.Force -> context.pushDestination(ForceUpdateRoute(state.url))
             is SideloadUpdateState.Optional -> context.pushDestination(UpdateRoute(state.url))

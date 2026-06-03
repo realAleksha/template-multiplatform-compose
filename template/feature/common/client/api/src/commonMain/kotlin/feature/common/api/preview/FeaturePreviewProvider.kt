@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import feature.common.api.BaseFeatureProvider
-import feature.common.api.FeatureContext
+import feature.common.api.FeatureNavContext
 import feature.common.api.preview.presentation.FeaturePreviewIcons
 import feature.common.api.preview.presentation.FeaturePreviewRoute
 import feature.common.api.preview.presentation.FeaturePreviewScreen
@@ -26,7 +26,7 @@ import shared.presentation.ui.component.DsSmallFloatingActionButton
 object FeaturePreviewProvider : BaseFeatureProvider() {
 
     @Composable
-    override fun onProvideContent(context: FeatureContext, content: @Composable () -> Unit) {
+    override fun onProvideContent(context: FeatureNavContext, content: @Composable () -> Unit) {
         content()
 
         val previewVisible = remember { mutableStateOf(false) }
@@ -57,7 +57,7 @@ object FeaturePreviewProvider : BaseFeatureProvider() {
         }
     }
 
-    override fun onProvideNavigation(context: FeatureContext, builder: NavGraphBuilder) {
+    override fun onProvideNavigation(context: FeatureNavContext, builder: NavGraphBuilder) {
         builder.composable<FeaturePreviewRoute> {
             FeaturePreviewScreen(
                 title = "Features",

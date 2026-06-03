@@ -25,6 +25,7 @@ import shared.presentation.navigation.replaceDestination
 import shared.presentation.navigation.restoreDestination
 import shared.presentation.navigation.setDestination
 import shared.presentation.ui.container.DsScaffold
+import kotlin.reflect.KClass
 
 private val nextFeatureIndex = compositionLocalOf { 0 }
 
@@ -35,7 +36,7 @@ fun FeatureNavHost(
     navGraphBuilder: NavGraphBuilder.(navController: NavHostController) -> Unit = {}
 ) {
     val index = nextFeatureIndex.current
-    val feature = remember(index) { context.features.getOrNull(index) as? FeatureProvider }
+    val feature = remember(index) { context.features.getOrNull(index) }
     if (feature != null) {
         CompositionLocalProvider(nextFeatureIndex provides index + 1) {
             feature.provideContent(context) {
@@ -71,11 +72,7 @@ private fun Content(
                 enterTransition = { EnterTransition.None },
                 exitTransition = { ExitTransition.None },
                 builder = {
-                    val navBuilder = this
-                    context.features.forEach { feature ->
-                        feature as FeatureProvider
-                        feature.provideNavigation(context, navBuilder)
-                    }
+                    context.features.forEach { it.provideNavigation(context, this) }
                     navGraphBuilder(context.navController)
                 }
             )
@@ -84,10 +81,15 @@ private fun Content(
 }
 
 data class FeatureNavHostContext(
-    override val debug: Boolean,
-    override val features: List<Feature>,
-    internal val navController: NavHostController
-) : FeatureContext {
+    internal val debug: Boolean,
+    internal val context: FeatureContext,
+    internal val navController: NavHostController,
+    override val features: List<FeatureProvider> = context.features.filterIsInstance<FeatureProvider>()
+) : FeatureNavContext {
+
+    override fun <T : Feature> get(type: KClass<T>): T = context.get(type)
+
+    override fun <T : Feature> getOrNull(type: KClass<T>): T? = context.getOrNull(type)
 
     override fun getCurrentBackStackChanges(): Flow<List<Int>> = navController.currentBackStack
         .map { entries -> entries.map { entry -> entry.destination.id } }

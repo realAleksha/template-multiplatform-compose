@@ -7,7 +7,8 @@ import feature.ads.api.AdsFeature
 import feature.auth.api.AuthFeature
 import feature.auth.stub.StubAuthProvider
 import feature.auth.supabase.SupabaseAuthProvider
-import feature.common.api.Feature
+import feature.common.api.BasicFeatureContext
+import feature.common.api.FeatureContext
 import feature.loader.api.LoaderFeature
 import feature.loader.basic.BasicLoaderProvider
 import feature.navigation.api.NavigationFeature
@@ -63,15 +64,15 @@ val app = module {
             )
         )
     }
-    single<SplashFeature> { BasicSplashProvider() }
-    single<LoaderFeature> { BasicLoaderProvider() }
-    single<NavigationFeature> { BasicNavigationProvider() }
-    single<PaymentsFeature> { RevenueCatPaymentsProvider() }
-    single<ThemeFeature> { BasicThemeProvider(get(), get()) }
-    single<PasscodeFeature> { BasicPasscodeProvider(get(), get()) }
-    single<AdsFeature> { AdMobAdsProvider() }
+    single { BasicSplashProvider() }.bind<SplashFeature>()
+    single { BasicLoaderProvider() }.bind<LoaderFeature>()
+    single { BasicNavigationProvider() }.bind<NavigationFeature>()
+    single { RevenueCatPaymentsProvider() }.bind<PaymentsFeature>()
+    single { BasicThemeProvider(get(), get()) }.bind<ThemeFeature>()
+    single { BasicPasscodeProvider(get(), get()) }.bind<PasscodeFeature>()
+    single { AdMobAdsProvider() }.bind<AdsFeature>()
     // {feature.update.client.sideload}
-    single<UpdateFeature> {
+    single {
         SideloadUpdateProvider(
             httpSource = get(),
             settingsSource = get(),
@@ -81,26 +82,29 @@ val app = module {
                 currentVersionCode = 1
             )
         )
-    }
+    }.bind<UpdateFeature>()
     // {feature.update.client.sideload}
     // {feature.update.client.store}
-    single<UpdateFeature> { StoreUpdateProvider() }
+    single { StoreUpdateProvider() }.bind<UpdateFeature>()
     // {feature.update.client.store}
-    single<AuthFeature>(SupabaseAuthProvider.qualifier) { SupabaseAuthProvider(get<SupabaseSource>().client) }
-    single<AuthFeature>(StubAuthProvider.qualifier) { StubAuthProvider() }
+    single { StubAuthProvider() }.bind<AuthFeature>()
+    single { SupabaseAuthProvider(get<SupabaseSource>().client) }.bind<AuthFeature>()
     // {feature.common.client.api}
-    single<List<Feature>> {
-        listOf(
-            get<SplashFeature>(),
-            get<ThemeFeature>(),
-            get<LoaderFeature>(),
-            get<PasscodeFeature>(),
-            get<NavigationFeature>(),
-            get<AuthFeature>(StubAuthProvider.qualifier),
-            get<AuthFeature>(SupabaseAuthProvider.qualifier),
-            get<PaymentsFeature>(),
-            get<UpdateFeature>(),
-            get<AdsFeature>()
+    single<FeatureContext> {
+        BasicFeatureContext(
+            listOf(
+                get<SplashFeature>(),
+                get<ThemeFeature>(),
+                get<LoaderFeature>(),
+                get<PasscodeFeature>(),
+                get<NavigationFeature>(),
+                get<StubAuthProvider>(),
+                get<SupabaseAuthProvider>(),
+                get<PaymentsFeature>(),
+                get<SideloadUpdateProvider>(),
+                get<StoreUpdateProvider>(),
+                get<AdMobAdsProvider>()
+            )
         )
     }
     // {feature.common.client.api}

@@ -2,7 +2,7 @@ package feature.loader.basic
 
 import androidx.compose.runtime.Composable
 import feature.common.api.Feature
-import feature.common.api.FeatureContext
+import feature.common.api.FeatureNavContext
 import feature.common.koin.KoinFeatureProvider
 import feature.common.api.preview.FeatureMethod
 import feature.common.api.preview.FeaturePreview
@@ -55,7 +55,7 @@ class BasicLoaderProvider : KoinFeatureProvider(), FeaturePreview, LoaderFeature
     }
 
     @Composable
-    override fun onProvideContent(context: FeatureContext, content: @Composable (() -> Unit)) {
+    override fun onProvideContent(context: FeatureNavContext, content: @Composable (() -> Unit)) {
         ViewStateHandler(
             state = state,
             content = content

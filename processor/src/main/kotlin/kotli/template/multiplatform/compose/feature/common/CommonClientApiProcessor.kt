@@ -2,6 +2,7 @@ package kotli.template.multiplatform.compose.feature.common
 
 import kotli.engine.TemplateState
 import kotli.engine.template.rule.RemoveFile
+import kotli.engine.template.rule.RemoveMarkedLine
 import kotli.engine.template.rule.RenamePackage
 import kotli.template.multiplatform.compose.Rules
 import kotli.template.multiplatform.compose.feature.UserFeatureProcessor
@@ -28,6 +29,10 @@ object CommonClientApiProcessor : UserFeatureProcessor() {
                 "kotli.app.presentation_no_features",
                 "kotli.app.presentation"
             )
+        )
+        state.onApplyRules(
+            Rules.ClientAppConfigKt,
+            RemoveMarkedLine("FeatureContext")
         )
     }
 }

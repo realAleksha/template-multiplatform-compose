@@ -14,7 +14,7 @@ fun App() {
 
     val context = FeatureNavHostContext(
         navController = rememberNavController(),
-        features = state.features,
+        context = state.context,
         debug = true
     )
 

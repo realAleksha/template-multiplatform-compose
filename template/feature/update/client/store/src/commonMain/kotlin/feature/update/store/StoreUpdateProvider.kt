@@ -2,7 +2,7 @@ package feature.update.store
 
 import androidx.compose.runtime.Composable
 import feature.common.api.Feature
-import feature.common.api.FeatureContext
+import feature.common.api.FeatureNavContext
 import feature.common.api.preview.FeatureMethod
 import feature.common.api.preview.FeaturePreview
 import feature.common.api.preview.MethodCallsAction
@@ -24,7 +24,7 @@ class StoreUpdateProvider : KoinActionFeatureProvider(), FeaturePreview, UpdateF
     )
 
     @Composable
-    override fun onProvideContent(context: FeatureContext, content: @Composable () -> Unit) {
+    override fun onProvideContent(context: FeatureNavContext, content: @Composable () -> Unit) {
         onProvideFeatureContent()
         content()
     }

@@ -8,15 +8,14 @@ import kotli.home.presentation.HomeRoute
 import shared.presentation.viewmodel.BaseViewModel
 
 class AppViewModel(
-    private val navigationFeature: NavigationFeature,
-    private val splashFeature: SplashFeature,
     val state: AppState
 ) : BaseViewModel() {
 
     override fun doBind() {
         withState {
+            state.setStartDestination(HomeRoute)
             // {feature.navigation.client.api}
-            navigationFeature.setItems(
+            state.context.get(NavigationFeature::class).setItems(
                 NavigationItem(
                     label = "Home",
                     route = HomeRoute,
@@ -24,8 +23,7 @@ class AppViewModel(
                 )
             )
             // {feature.navigation.client.api}
-            state.setStartDestination(HomeRoute)
-            splashFeature.setVisible(false)
+            state.context.get(SplashFeature::class).setVisible(false)
         }
     }
 }
