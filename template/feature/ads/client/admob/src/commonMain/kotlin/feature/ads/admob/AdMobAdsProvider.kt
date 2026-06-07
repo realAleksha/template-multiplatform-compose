@@ -59,7 +59,10 @@ class AdMobAdsProvider(
     override fun NativeAd() {
         AdMobNativeAd(nativeAdUnitId)
     }
+    override fun isAvailable(): Boolean = isSupported()
 }
+
+internal expect fun isSupported(): Boolean
 
 @Composable
 internal expect fun AdMobInit()

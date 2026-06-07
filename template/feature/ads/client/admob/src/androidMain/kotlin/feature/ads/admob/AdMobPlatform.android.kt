@@ -9,6 +9,8 @@ import app.lexilabs.basic.ads.composable.NativeAd
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+internal actual fun isSupported(): Boolean = true
+
 @Composable
 internal actual fun AdMobInit() {
     BasicAds.Initialize()

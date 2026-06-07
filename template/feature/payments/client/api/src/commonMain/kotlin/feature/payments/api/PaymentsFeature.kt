@@ -6,5 +6,5 @@ interface PaymentsFeature : Feature {
 
     fun showPaywall(offeringId: String? = null)
 
-    suspend fun hasEntitlement(entitlementId: String): Boolean
+    suspend fun hasAccess(entitlementId: String): Boolean
 }

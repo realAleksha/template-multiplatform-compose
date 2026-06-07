@@ -102,6 +102,12 @@ private fun LazyListScope.featureItem(
                         text = preview.type.simpleName,
                         color = DsTheme.current.onSurfaceSecondary
                     )
+                    if (!preview.isAvailable()) {
+                        DsText(
+                            text = "Not supported on this platform",
+                            color = DsTheme.current.error
+                        )
+                    }
                 }
                 DsIcon(
                     model = FeaturePreviewIcons.chevronRight,

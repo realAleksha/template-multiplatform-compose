@@ -33,7 +33,11 @@ class StoreUpdateProvider : KoinActionFeatureProvider(), FeaturePreview, UpdateF
         onCheckForUpdates()
     }
 
+    override fun isAvailable(): Boolean = isSupported()
+
 }
+
+internal expect fun isSupported(): Boolean
 
 @Composable
 internal expect fun onProvideFeatureContent()

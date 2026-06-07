@@ -39,7 +39,11 @@ fun FeatureNavHost(
     val feature = remember(index) { context.features.getOrNull(index) }
     if (feature != null) {
         CompositionLocalProvider(nextFeatureIndex provides index + 1) {
-            feature.provideContent(context) {
+            if (feature.isAvailable()) {
+                feature.provideContent(context) {
+                    FeatureNavHost(context, startDestinationProvider, navGraphBuilder)
+                }
+            } else {
                 FeatureNavHost(context, startDestinationProvider, navGraphBuilder)
             }
         }
@@ -99,7 +103,8 @@ data class FeatureNavHostContext(
         .map { entry -> entry.destination.id }
         .distinctUntilChanged()
 
-    override fun getCurrentDestination(): Int? = navController.currentBackStackEntry?.destination?.id
+    override fun getCurrentDestination(): Int? =
+        navController.currentBackStackEntry?.destination?.id
 
     override fun getDestinationId(route: Any): Int = route::class.serializer().generateHashCode()
 

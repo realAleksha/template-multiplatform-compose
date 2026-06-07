@@ -172,4 +172,7 @@ class SideloadUpdateProvider(
 
     private object CheckForUpdates : Action
     private data class StateAction(val state: SideloadUpdateState) : Action
+    override fun isAvailable(): Boolean = isSupported()
 }
+
+internal expect fun isSupported(): Boolean

@@ -9,6 +9,8 @@ internal actual fun onProvideFeatureContent() {
     // Not applicable
 }
 
+internal actual fun isSupported(): Boolean = true
+
 internal actual fun onCheckForUpdates() {
     val url = NSURL(string = "itms-apps://itunes.apple.com/app/idYOUR_APP_ID")
     if (UIApplication.sharedApplication.canOpenURL(url)) {

@@ -65,3 +65,5 @@ internal actual suspend fun hasEntitlement(entitlementId: String): Boolean =
             }
         )
     }
+
+internal actual fun isSupported(): Boolean = true

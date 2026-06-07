@@ -15,4 +15,8 @@ class SupabaseAuthProvider(
     override fun createAuthRepository(): AuthRepository = SupabaseAuthRepository(client)
 
     override fun createGoogleFlowProvider(): GoogleFlowProvider = SupabaseFlowProvider(koinApp.koin.get(), client)
+
+    override fun isAvailable(): Boolean = isSupported()
 }
+
+internal expect fun isSupported(): Boolean

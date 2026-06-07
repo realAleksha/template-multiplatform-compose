@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
+internal actual fun isSupported(): Boolean = false
+
 @Composable
 internal actual fun AdMobInit() {
 }

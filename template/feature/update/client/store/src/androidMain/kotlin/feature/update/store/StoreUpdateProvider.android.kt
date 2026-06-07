@@ -12,6 +12,8 @@ internal actual fun onProvideFeatureContent() {
     // Not applicable
 }
 
+internal actual fun isSupported(): Boolean = true
+
 internal actual fun onCheckForUpdates() {
     val context = AppHolder.app
     val activity = context.findActivity() ?: return

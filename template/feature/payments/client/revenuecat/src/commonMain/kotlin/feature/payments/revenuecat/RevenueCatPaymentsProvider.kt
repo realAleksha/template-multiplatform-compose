@@ -9,6 +9,7 @@ import feature.common.api.FeatureNavContext
 import feature.common.api.preview.FeatureMethod
 import feature.common.api.preview.FeaturePreview
 import feature.common.api.preview.MethodCallsAction
+import feature.common.api.preview.MethodReturnsSuspendValue
 import feature.common.koin.KoinActionFeatureProvider
 import feature.payments.api.PaymentsFeature
 import kotlinx.serialization.Serializable
@@ -27,17 +28,19 @@ class RevenueCatPaymentsProvider(
         MethodCallsAction("showPaywall()") {
             showPaywall()
         },
-        MethodCallsAction("hasEntitlement('premium')") {
-            this@RevenueCatPaymentsProvider.hasEntitlement("premium")
+        MethodReturnsSuspendValue("hasAccess('premium')") {
+            hasAccess("premium").toString()
         }
     )
+
+    override fun isAvailable(): Boolean = isSupported()
 
     override fun showPaywall(offeringId: String?) {
         onSendAction(ShowPaywall(offeringId))
     }
 
-    override suspend fun hasEntitlement(entitlementId: String): Boolean {
-        return feature.payments.revenuecat.hasEntitlement(entitlementId)
+    override suspend fun hasAccess(entitlementId: String): Boolean {
+        return hasEntitlement(entitlementId)
     }
 
     override suspend fun onReceiveAction(action: Action, context: FeatureNavContext) {

@@ -3,7 +3,7 @@ package feature.common.api.preview
 import feature.common.api.Feature
 import kotlin.reflect.KClass
 
-interface FeaturePreview {
+interface FeaturePreview : Feature {
 
     val name: String
 

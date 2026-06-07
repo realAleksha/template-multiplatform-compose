@@ -2,6 +2,8 @@ package feature.payments.revenuecat
 
 import androidx.compose.runtime.Composable
 
+internal expect fun isSupported(): Boolean
+
 internal expect suspend fun hasEntitlement(entitlementId: String): Boolean
 
 @Composable
