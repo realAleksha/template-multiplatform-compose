@@ -36,7 +36,7 @@ google-play-app-update = "2.1.0"
 user-messaging-platform = "3.1.0"
 cocoapods-admob = "11.13.0"
 cocoapods-ump = "2.1.0"
-purchases-kmp = "3.0.3"
+purchases-kmp = "3.0.5"
 slf4j-simple = "2.0.17"
 sqldelight = "2.3.2"
 supabase = "3.6.0"
@@ -102,6 +102,7 @@ google-play-app-update-ktx = { module = "com.google.android.play:app-update-ktx"
 user-messaging-platform = { module = "com.google.android.ump:user-messaging-platform", version.ref = "user-messaging-platform" }
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 purchases-core = { module = "com.revenuecat.purchases:purchases-kmp-core", version.ref = "purchases-kmp" }
+purchases-ui = { module = "com.revenuecat.purchases:purchases-kmp-ui", version.ref = "purchases-kmp" }
 slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j-simple" }
 sqldelight-androidx-paging = { module = "app.cash.sqldelight:androidx-paging3-extensions", version.ref = "sqldelight" }
 sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }

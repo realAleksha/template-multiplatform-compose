@@ -1,5 +1,6 @@
 ## API Interface (PaymentsFeature)
-- `fun showPaywall()` - Shows the paywall for in-app purchases and subscriptions
+- `fun showPaywall(offeringId: String? = null)` - Shows the paywall for in-app purchases and subscriptions. Optionally, a specific offering ID can be provided.
+- `suspend fun hasEntitlement(entitlementId: String): Boolean` - Checks if the user has an active entitlement with the given ID.
 
 ## Installation
 
@@ -15,22 +16,18 @@ Then, register the feature provider in your application's DI container (e.g., in
 
 ```kotlin
 // Using Koin
-single<PaymentsFeature> { RevenueCatPaymentsProvider() }
-
-// Add to your features list
-single<List<Feature>> {
-    listOf(
-        // other features...
-        get<PaymentsFeature>(),
-        // other features...
-    )
+single<PaymentsFeature> { 
+    RevenueCatPaymentsProvider(
+        apiKey = "...",
+        apiUserId = "..."
+    ) 
 }
 ```
 
 ## Configuration
-The `RevenueCatPaymentsProvider` doesn't require any configuration parameters.
-
-> **Note:** The current implementation is a placeholder. The `showPaywall()` method is not yet implemented.
+The `RevenueCatPaymentsProvider` accepts the following parameters:
+- `apiKey` (required): The RevenueCat API key.
+- `apiUserId` (required): The unique identifier for the user.
 
 ## Usage
 To get an instance of the `PaymentsFeature` provider, use Koin's dependency injection:
@@ -46,6 +43,9 @@ class YourClass(private val paymentsFeature: PaymentsFeature)
 Example usage:
 
 ```kotlin
+// Check if user has "premium" entitlement
+val isPremium = paymentsFeature.hasEntitlement("premium")
+
 // Show the paywall
 paymentsFeature.showPaywall()
 ```

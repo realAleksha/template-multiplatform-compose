@@ -4,5 +4,7 @@ import feature.common.api.Feature
 
 interface PaymentsFeature : Feature {
 
-    fun showPaywall()
+    fun showPaywall(offeringId: String? = null)
+
+    suspend fun hasEntitlement(entitlementId: String): Boolean
 }

@@ -28,9 +28,11 @@ kotlin {
         }
         androidMain.dependencies {
             implementation(libs.purchases.core)
+            implementation(libs.purchases.ui)
         }
         iosMain.dependencies {
             implementation(libs.purchases.core)
+            implementation(libs.purchases.ui)
         }
     }
 }

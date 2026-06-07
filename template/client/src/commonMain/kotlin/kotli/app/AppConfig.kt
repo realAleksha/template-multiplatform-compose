@@ -67,7 +67,7 @@ val app = module {
     single { BasicSplashProvider() }.bind<SplashFeature>()
     single { BasicLoaderProvider() }.bind<LoaderFeature>()
     single { BasicNavigationProvider() }.bind<NavigationFeature>()
-    single { RevenueCatPaymentsProvider() }.bind<PaymentsFeature>()
+    single { RevenueCatPaymentsProvider(apiKey = "REVENUECAT_API_KEY", apiUserId = "REVENUECAT_API_USER_ID") }.bind<PaymentsFeature>()
     single { BasicThemeProvider(get(), get()) }.bind<ThemeFeature>()
     single { BasicPasscodeProvider(get(), get()) }.bind<PasscodeFeature>()
     single { AdMobAdsProvider() }.bind<AdsFeature>()
