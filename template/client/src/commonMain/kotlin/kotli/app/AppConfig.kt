@@ -4,6 +4,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import feature.ads.admob.AdMobAdsProvider
 import feature.ads.api.AdsFeature
+import feature.analytics.api.AnalyticsFeature
+import feature.analytics.firebase.FirebaseAnalyticsProvider
+import feature.analytics.stub.StubAnalyticsProvider
 import feature.auth.api.AuthFeature
 import feature.auth.stub.StubAuthProvider
 import feature.auth.supabase.SupabaseAuthProvider
@@ -71,6 +74,12 @@ val app = module {
     single { BasicThemeProvider(get(), get()) }.bind<ThemeFeature>()
     single { BasicPasscodeProvider(get(), get()) }.bind<PasscodeFeature>()
     single { AdMobAdsProvider() }.bind<AdsFeature>()
+    // {feature.analytics.client.stub}
+    single { StubAnalyticsProvider() }.bind<AnalyticsFeature>()
+    // {feature.analytics.client.stub}
+    // {feature.analytics.client.firebase}
+    single { FirebaseAnalyticsProvider() }.bind<AnalyticsFeature>()
+    // {feature.analytics.client.firebase}
     // {feature.update.client.sideload}
     single {
         SideloadUpdateProvider(
@@ -103,7 +112,9 @@ val app = module {
                 get<PaymentsFeature>(),
                 get<SideloadUpdateProvider>(),
                 get<StoreUpdateProvider>(),
-                get<AdMobAdsProvider>()
+                get<AdMobAdsProvider>(),
+                get<StubAnalyticsProvider>(),
+                get<FirebaseAnalyticsProvider>()
             )
         )
     }

@@ -9,7 +9,7 @@ abstract class ActionFeatureProvider : BaseFeatureProvider() {
     private val actionFlow = MutableSharedFlow<Action>(extraBufferCapacity = Int.MAX_VALUE)
 
     @Composable
-    override fun provideContent(context: FeatureNavContext, content: @Composable (() -> Unit)) {
+    final override fun provideContent(context: FeatureNavContext, content: @Composable (() -> Unit)) {
         LaunchedEffect(context) { actionFlow.collect { action -> onReceiveAction(action, context) } }
         super.provideContent(context, content)
     }

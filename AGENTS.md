@@ -42,3 +42,19 @@ When adding a new feature (e.g., `feature:update:client:store`):
         - `title.md`: Short name of the feature.
         - `description.md`: Brief overview of what the feature does.
         - `usage.md`: Detailed instructions on how to install and use the feature in the generated app.
+
+## Feature Implementation Patterns
+
+To maintain consistency across the project, follow these architectural patterns when implementing new features:
+
+- **Centralized Implementation**: Implement the feature provider class in `commonMain`. There should be only one implementation per feature module. Do not create separate provider classes for different platforms.
+- **Mandatory Inheritance**: Feature provider implementations (e.g., `FirebaseAnalyticsProvider`) must inherit from:
+    - `KoinActionFeatureProvider`: Integrates the feature with Koin.
+    - `FeaturePreview`: Enables the feature to be displayed and tested in the app's preview/debug dashboard.
+    - The feature's API interface (e.g., `AnalyticsFeature`).
+- **Platform Delegation**:
+    - Move all platform-specific logic to `expect`/`actual` functions or properties.
+    - These should be placed in a file named `<FeatureName>Platform.kt` (e.g., `FirebaseAnalyticsPlatform.kt`).
+    - Use platform-specific file naming: `FirebaseAnalyticsPlatform.android.kt`, `FirebaseAnalyticsPlatform.ios.kt`, etc.
+- **Availability Check**: Use `isSupported(): Boolean` as the standard naming in the platform file to check for platform support. The provider's `isAvailable()` should delegate to this.
+- **Isolation**: When working on a feature, strictly avoid modifying files in unrelated feature modules.

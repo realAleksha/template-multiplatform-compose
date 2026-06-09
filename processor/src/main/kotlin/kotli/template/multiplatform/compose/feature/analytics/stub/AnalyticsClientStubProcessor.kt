@@ -1,7 +1,8 @@
-package kotli.template.multiplatform.compose.feature.analytics
+package kotli.template.multiplatform.compose.feature.analytics.stub
 
 import kotli.engine.FeatureProcessor
 import kotli.template.multiplatform.compose.feature.UserFeatureProcessor
+import kotli.template.multiplatform.compose.feature.analytics.AnalyticsClientApiProcessor
 import kotlin.reflect.KClass
 
 object AnalyticsClientStubProcessor : UserFeatureProcessor() {
@@ -13,6 +14,4 @@ object AnalyticsClientStubProcessor : UserFeatureProcessor() {
     override fun dependencies(): List<KClass<out FeatureProcessor>> = listOf(
         AnalyticsClientApiProcessor::class
     )
-
-    override fun isInternal(): Boolean = true
 }

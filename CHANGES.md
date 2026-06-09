@@ -3,3 +3,6 @@
 - removed cashapp paging – androidx paging now is fully multiplatform
 - removed settings multiplatform – androidx datastore now is fully multiplatform
 - added support for wasmJs target
+- added ads support with admob implementation
+- added analytics support with firebase implementation
+- added payments support with revenuecat implementation

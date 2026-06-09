@@ -17,6 +17,7 @@ coil = "3.4.0"
 compose-material3 = "1.11.0-alpha07"
 compose-multiplatform = "1.11.0"
 filekit = "0.14.1"
+firebase-kotlin-sdk = "2.4.0"
 koin = "4.2.1"
 korlibs = "6.0.1"
 kotlin = "2.3.21"
@@ -64,6 +65,7 @@ compose-components-resources = { module = "org.jetbrains.compose.components:comp
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 filekit-compose = { module = "io.github.vinceglb:filekit-dialogs-compose", version.ref = "filekit" }
+firebase-analytics = { module = "dev.gitlive:firebase-analytics", version.ref = "firebase-kotlin-sdk" }
 koin-compose-viewmodel-navigation = { module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin" }
 korlibs-crypto = { module = "com.soywiz:korlibs-crypto", version.ref = "korlibs" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }

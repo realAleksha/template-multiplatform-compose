@@ -26,12 +26,32 @@ kotlin {
             implementation(projects.feature.analytics.client.api)
             implementation(libs.koin.compose.viewmodel.navigation)
         }
+        // {platform.android.dependencies}
+        androidMain.dependencies {
+            implementation(libs.firebase.analytics)
+        }
+        // {platform.android.dependencies}
+        // {platform.ios.dependencies}
+        iosMain.dependencies {
+            implementation(libs.firebase.analytics)
+        }
+        // {platform.ios.dependencies}
+        // {platform.js.dependencies}
+        jsMain.dependencies {
+            implementation(libs.firebase.analytics)
+        }
+        // {platform.js.dependencies}
+        // {platform.jvm.dependencies}
+        jvmMain.dependencies {
+            implementation(libs.firebase.analytics)
+        }
+        // {platform.jvm.dependencies}
     }
 }
 
 // {platform.android.config}
 android {
-    namespace = "feature.analytics.stub"
+    namespace = "feature.analytics.firebase"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 }
 // {platform.android.config}
