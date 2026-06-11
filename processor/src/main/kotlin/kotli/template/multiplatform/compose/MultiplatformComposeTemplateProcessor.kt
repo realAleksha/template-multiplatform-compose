@@ -32,7 +32,7 @@ import kotli.template.multiplatform.compose.feature.onboarding.OnboardingFeature
 import kotli.template.multiplatform.compose.feature.passcode.PasscodeFeatureProvider
 import kotli.template.multiplatform.compose.feature.payments.PaymentsFeatureProvider
 import kotli.template.multiplatform.compose.feature.profile.ProfileFeatureProvider
-import kotli.template.multiplatform.compose.feature.rate.RateFeatureProvider
+import kotli.template.multiplatform.compose.feature.review.ReviewFeatureProvider
 import kotli.template.multiplatform.compose.feature.settings.SettingsFeatureProvider
 import kotli.template.multiplatform.compose.feature.splash.SplashFeatureProvider
 import kotli.template.multiplatform.compose.feature.support.SupportFeatureProvider
@@ -122,7 +122,7 @@ object MultiplatformComposeTemplateProcessor : BaseTemplateProcessor() {
         OnboardingFeatureProvider,
         PaymentsFeatureProvider,
         ProfileFeatureProvider,
-        RateFeatureProvider,
+        ReviewFeatureProvider,
         SettingsFeatureProvider,
         SupportFeatureProvider,
         UpdateFeatureProvider

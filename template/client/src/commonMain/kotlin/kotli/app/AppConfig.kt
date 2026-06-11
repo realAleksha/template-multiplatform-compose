@@ -20,6 +20,9 @@ import feature.passcode.api.PasscodeFeature
 import feature.passcode.basic.BasicPasscodeProvider
 import feature.payments.api.PaymentsFeature
 import feature.payments.revenuecat.RevenueCatPaymentsProvider
+import feature.review.api.ReviewFeature
+import feature.review.market.MarketReviewProvider
+import feature.review.stub.StubReviewProvider
 import feature.splash.api.SplashFeature
 import feature.splash.basic.BasicSplashProvider
 import feature.theme.api.ThemeFeature
@@ -74,6 +77,12 @@ val app = module {
     single { BasicThemeProvider(get(), get()) }.bind<ThemeFeature>()
     single { BasicPasscodeProvider(get(), get()) }.bind<PasscodeFeature>()
     single { AdMobAdsProvider() }.bind<AdsFeature>()
+    // {feature.review.client.stub}
+    single { StubReviewProvider() }.bind<ReviewFeature>()
+    // {feature.review.client.stub}
+    // {feature.review.client.market}
+    single { MarketReviewProvider() }.bind<ReviewFeature>()
+    // {feature.review.client.market}
     // {feature.analytics.client.stub}
     single { StubAnalyticsProvider() }.bind<AnalyticsFeature>()
     // {feature.analytics.client.stub}
@@ -113,6 +122,8 @@ val app = module {
                 get<SideloadUpdateProvider>(),
                 get<StoreUpdateProvider>(),
                 get<AdMobAdsProvider>(),
+                get<StubReviewProvider>(),
+                get<MarketReviewProvider>(),
                 get<StubAnalyticsProvider>(),
                 get<FirebaseAnalyticsProvider>()
             )

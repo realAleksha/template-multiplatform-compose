@@ -25,7 +25,7 @@ kotlin {
 
 // {platform.android.config}
 android {
-    namespace = "feature.rate.api"
+    namespace = "feature.review.api"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 }
 // {platform.android.config}

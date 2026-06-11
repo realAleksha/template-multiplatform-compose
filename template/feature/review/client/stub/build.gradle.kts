@@ -22,7 +22,8 @@ kotlin {
             implementation(libs.compose.components.resources)
             implementation(projects.shared.presentation)
             implementation(projects.feature.common.client.api)
-            implementation(projects.feature.rate.client.api)
+            implementation(projects.feature.common.client.koin)
+            implementation(projects.feature.review.client.api)
             implementation(libs.koin.compose.viewmodel.navigation)
         }
     }
@@ -30,7 +31,7 @@ kotlin {
 
 // {platform.android.config}
 android {
-    namespace = "feature.rate.stub"
+    namespace = "feature.review.stub"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 }
 // {platform.android.config}
