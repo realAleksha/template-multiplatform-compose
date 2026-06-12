@@ -70,6 +70,7 @@ kotlin {
                 optIn("kotlinx.coroutines.FlowPreview")
                 optIn("kotlin.js.ExperimentalWasmJsInterop")
                 optIn("kotlinx.coroutines.DelicateCoroutinesApi")
+                optIn("org.koin.core.annotation.KoinInternalApi")
                 optIn("androidx.compose.ui.ExperimentalComposeUiApi")
                 optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
                 optIn("kotlinx.serialization.InternalSerializationApi")

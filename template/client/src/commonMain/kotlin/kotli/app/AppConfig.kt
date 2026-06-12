@@ -48,7 +48,6 @@ import shared.presentation.theme.ThemeState
 import shared.presentation.ui.theme.DsThemes
 
 fun NavGraphBuilder.app(navController: NavHostController) {
-    platform(navController)
     common(navController)
     home(navController)
 }
@@ -77,18 +76,10 @@ val app = module {
     single { BasicThemeProvider(get(), get()) }.bind<ThemeFeature>()
     single { BasicPasscodeProvider(get(), get()) }.bind<PasscodeFeature>()
     single { AdMobAdsProvider() }.bind<AdsFeature>()
-    // {feature.review.client.stub}
     single { StubReviewProvider() }.bind<ReviewFeature>()
-    // {feature.review.client.stub}
-    // {feature.review.client.market}
     single { MarketReviewProvider() }.bind<ReviewFeature>()
-    // {feature.review.client.market}
-    // {feature.analytics.client.stub}
     single { StubAnalyticsProvider() }.bind<AnalyticsFeature>()
-    // {feature.analytics.client.stub}
-    // {feature.analytics.client.firebase}
     single { FirebaseAnalyticsProvider() }.bind<AnalyticsFeature>()
-    // {feature.analytics.client.firebase}
     // {feature.update.client.sideload}
     single {
         SideloadUpdateProvider(
@@ -102,12 +93,9 @@ val app = module {
         )
     }.bind<UpdateFeature>()
     // {feature.update.client.sideload}
-    // {feature.update.client.store}
     single { StoreUpdateProvider() }.bind<UpdateFeature>()
-    // {feature.update.client.store}
     single { StubAuthProvider() }.bind<AuthFeature>()
     single { SupabaseAuthProvider(get<SupabaseSource>().client) }.bind<AuthFeature>()
-    // {feature.common.client.api}
     single<FeatureContext> {
         BasicFeatureContext(
             listOf(

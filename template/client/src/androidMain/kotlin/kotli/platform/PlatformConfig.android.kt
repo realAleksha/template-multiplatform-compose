@@ -13,9 +13,6 @@ import kotli.common.data.source.database.sqldelight.SqlDelightDb
 import kotli.common.data.source.database.sqldelight.SqlDelightSource
 import org.koin.dsl.module
 
-actual fun NavGraphBuilder.platform(navController: NavHostController) {
-}
-
 actual val platform = module {
     // {data.database.room}
     single<DatabaseSource> {

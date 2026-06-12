@@ -1,7 +1,5 @@
 package kotli.platform
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.room3.Room
 import app.cash.sqldelight.async.coroutines.synchronous
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
@@ -12,8 +10,6 @@ import kotli.common.data.source.database.sqldelight.SqlDelightSource
 import org.koin.dsl.module
 import platform.Foundation.NSHomeDirectory
 import kotli.common.data.source.database.room.RoomDb as RoomDatabase
-
-actual fun NavGraphBuilder.platform(navController: NavHostController) = Unit
 
 actual val platform = module {
     // {data.database.room}
