@@ -1,7 +1,7 @@
 package feature.passcode.basic.domain.usecase
 
 import feature.passcode.basic.domain.repository.PasscodeRepository
-import shared.data.source.settings.SettingsSource
+import shared.data.settings.SettingsSource
 
 internal class ForgotPasscodeUseCase(
     private val repository: PasscodeRepository,

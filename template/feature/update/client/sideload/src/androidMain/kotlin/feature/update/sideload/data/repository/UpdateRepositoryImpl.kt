@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.core.content.FileProvider
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.jvm.javaio.copyTo
-import shared.data.AppHolder
+import shared.data.common.AppHolder
 import java.io.File
 
 internal actual class PlatformFile(val file: File) {

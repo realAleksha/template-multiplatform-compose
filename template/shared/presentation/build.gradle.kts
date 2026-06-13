@@ -52,7 +52,8 @@ kotlin {
             implementation(libs.markdown.renderer.m3) // {userflow.component.markdown}
             implementation(libs.markdown.renderer.coil3) // {userflow.component.markdown}
             implementation(libs.androidx.paging.compose)
-            implementation(projects.shared.data)
+            implementation(projects.shared.data.common)
+            implementation(projects.shared.data.paging)
         }
         // {platform.android.dependencies}
         androidMain.dependencies {

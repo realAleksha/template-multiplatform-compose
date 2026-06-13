@@ -15,7 +15,7 @@ import androidx.paging.LoadState.NotLoading
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import kotlinx.coroutines.flow.Flow
-import shared.data.source.paging.Pager
+import shared.data.paging.Pager
 
 @Composable
 fun <V : Any> DsPagingList(

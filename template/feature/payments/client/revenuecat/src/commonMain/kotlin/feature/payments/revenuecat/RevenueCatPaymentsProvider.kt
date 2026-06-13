@@ -16,8 +16,8 @@ import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
 
 class RevenueCatPaymentsProvider(
-    private val apiKey: String,
-    private val apiUserId: String,
+    private val apiKey: String = "REVENUECAT_API_KEY",
+    private val apiUserId: String = "REVENUECAT_API_USER_ID",
 ) : KoinActionFeatureProvider(), FeaturePreview, PaymentsFeature {
 
     override val name: String = "RevenueCat Payments"

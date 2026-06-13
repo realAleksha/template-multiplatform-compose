@@ -4,6 +4,7 @@ import kotli.engine.BaseFeatureProcessor
 import kotli.engine.FeatureTag
 import kotli.engine.TemplateState
 import kotli.engine.template.VersionCatalogRules
+import kotli.engine.template.rule.CleanupMarkedLine
 import kotli.engine.template.rule.RemoveFile
 import kotli.engine.template.rule.RemoveMarkedLine
 import kotli.template.multiplatform.compose.Rules
@@ -28,6 +29,10 @@ object KorlibsEncryptionProcessor : BaseFeatureProcessor() {
             RemoveFile()
         )
         state.onApplyRules(
+            Rules.EncryptionKorlibsDir,
+            RemoveFile()
+        )
+        state.onApplyRules(
             Rules.EncryptionSource,
             RemoveFile()
         )
@@ -43,6 +48,16 @@ object KorlibsEncryptionProcessor : BaseFeatureProcessor() {
             VersionCatalogRules(
                 RemoveMarkedLine("korlibs")
             )
+        )
+        state.onApplyRules(
+            Rules.RootSettingsGradle,
+            RemoveMarkedLine("shared:data:encryption"),
+            RemoveMarkedLine("shared:data:encryption-korlibs")
+        )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("projects.shared.data.encryption"),
+            RemoveMarkedLine("projects.shared.data.encryptionKorlibs")
         )
     }
 

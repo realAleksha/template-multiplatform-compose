@@ -9,7 +9,7 @@ import io.github.jan.supabase.functions.Functions
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.realtime.Realtime
 import io.github.jan.supabase.storage.Storage
-import shared.data.source.DataSource
+import shared.data.common.DataSource
 
 class SupabaseSource(
     private val apiKey: String,

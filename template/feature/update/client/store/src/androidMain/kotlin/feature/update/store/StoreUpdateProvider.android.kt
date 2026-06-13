@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import shared.data.AppHolder
+import shared.data.common.AppHolder
 import shared.presentation.misc.extensions.findActivity
 
 @Composable

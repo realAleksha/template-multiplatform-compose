@@ -25,7 +25,10 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.compose.components.resources)
-            implementation(projects.shared.data)
+            implementation(projects.shared.data.common)
+            implementation(projects.shared.data.encoding)
+            implementation(projects.shared.data.settings)
+            implementation(projects.shared.data.encryption)
             implementation(projects.shared.presentation)
             implementation(projects.feature.common.client.api)
             implementation(projects.feature.common.client.koin)

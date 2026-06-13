@@ -3,6 +3,7 @@ package kotli.template.multiplatform.compose.data.analytics.basic
 import kotli.engine.BaseFeatureProcessor
 import kotli.engine.FeatureTag
 import kotli.engine.TemplateState
+import kotli.engine.template.rule.CleanupMarkedLine
 import kotli.engine.template.rule.RemoveFile
 import kotli.engine.template.rule.RemoveMarkedLine
 import kotli.template.multiplatform.compose.Rules
@@ -19,12 +20,24 @@ object BasicAnalyticsProcessor : BaseFeatureProcessor() {
 
     override fun doRemove(state: TemplateState) {
         state.onApplyRules(
+            Rules.AnalyticsDir,
+            RemoveFile()
+        )
+        state.onApplyRules(
             Rules.AnalyticsSource,
             RemoveFile()
         )
         state.onApplyRules(
             Rules.ClientCommonConfigKt,
             RemoveMarkedLine("AnalyticsSource")
+        )
+        state.onApplyRules(
+            Rules.RootSettingsGradle,
+            RemoveMarkedLine("shared:data:analytics")
+        )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("projects.shared.data.analytics")
         )
     }
 

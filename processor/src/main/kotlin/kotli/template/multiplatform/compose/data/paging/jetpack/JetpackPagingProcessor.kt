@@ -5,6 +5,7 @@ import kotli.engine.FeatureTag
 import kotli.engine.TemplateState
 import kotli.engine.template.VersionCatalogRules
 import kotli.engine.template.rule.CleanupMarkedBlock
+import kotli.engine.template.rule.CleanupMarkedLine
 import kotli.engine.template.rule.RemoveFile
 import kotli.engine.template.rule.RemoveMarkedLine
 import kotli.template.multiplatform.compose.Rules
@@ -28,6 +29,10 @@ object JetpackPagingProcessor : BaseFeatureProcessor() {
 
     override fun doRemove(state: TemplateState) {
         state.onApplyRules(
+            Rules.PagingJetpackDir,
+            RemoveFile()
+        )
+        state.onApplyRules(
             VersionCatalogRules(
                 RemoveMarkedLine("androidx-paging")
             )
@@ -49,8 +54,12 @@ object JetpackPagingProcessor : BaseFeatureProcessor() {
             RemoveMarkedLine("androidx.paging")
         )
         state.onApplyRules(
-            "*/paging/jetpack/*",
-            RemoveFile()
+            Rules.RootSettingsGradle,
+            RemoveMarkedLine("shared:data:paging-jetpack")
+        )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("projects.shared.data.pagingJetpack")
         )
     }
 

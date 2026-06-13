@@ -1,24 +1,20 @@
 package kotli.common
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import kotli.common.data.source.supabase.SupabaseSource
 import org.koin.dsl.module
-import shared.data.source.analytics.AnalyticsSource
-import shared.data.source.analytics.BasicAnalyticsSource
-import shared.data.source.cache.BasicCacheSource
-import shared.data.source.cache.CacheSource
-import shared.data.source.config.BasicConfigSource
-import shared.data.source.config.ConfigSource
-import shared.data.source.encryption.EncryptionSource
-import shared.data.source.encryption.korlibs.KorlibsEncryptionSource
-import shared.data.source.http.HttpSource
-import shared.data.source.paging.PagingSource
-import shared.data.source.paging.jetpack.JetpackPagingSource
-import shared.data.source.settings.SettingsSource
-import shared.data.source.settings.datastore.DataStoreSource
-
-fun NavGraphBuilder.common(navController: NavHostController) {}
+import shared.data.analytics.AnalyticsSource
+import shared.data.analytics.BasicAnalyticsSource
+import shared.data.cache.BasicCacheSource
+import shared.data.cache.CacheSource
+import shared.data.config.BasicConfigSource
+import shared.data.config.ConfigSource
+import shared.data.encryption.EncryptionSource
+import shared.data.encryption.korlibs.KorlibsEncryptionSource
+import shared.data.http.HttpSource
+import shared.data.paging.PagingSource
+import shared.data.paging.jetpack.JetpackPagingSource
+import shared.data.settings.SettingsSource
+import shared.data.settings.datastore.DataStoreSource
 
 val common = module {
     single { HttpSource() }

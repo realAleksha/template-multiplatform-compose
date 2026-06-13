@@ -40,9 +40,9 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
-import shared.data.source.encryption.EncryptionMethod
-import shared.data.source.encryption.EncryptionSource
-import shared.data.source.settings.SettingsSource
+import shared.data.encryption.EncryptionMethod
+import shared.data.encryption.EncryptionSource
+import shared.data.settings.SettingsSource
 import kotlin.reflect.KClass
 import kotlin.time.Duration.Companion.seconds
 

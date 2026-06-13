@@ -2,8 +2,8 @@ package feature.theme.basic.provide.data
 
 import feature.theme.basic.provide.domain.model.ThemeConfigModel
 import feature.theme.basic.provide.domain.repository.ThemeRepository
-import shared.data.source.encoding.EncodingStrategy
-import shared.data.source.settings.SettingsSource
+import shared.data.encoding.EncodingStrategy
+import shared.data.settings.SettingsSource
 
 internal class ThemeRepositoryImpl(
     private val settingsSource: SettingsSource,

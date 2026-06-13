@@ -24,20 +24,13 @@ object BasicCacheProcessor : BaseFeatureProcessor() {
         CommonStatelyCollectionsProcessor::class
     )
 
-    override fun doApply(state: TemplateState) {
-        state.onApplyRules(
-            Rules.DataBuildGradle,
-            CleanupMarkedLine("{data.cache.basic}")
-        )
-    }
-
     override fun doRemove(state: TemplateState) {
         state.onApplyRules(
-            Rules.CacheSource,
+            Rules.CacheSourceDir,
             RemoveFile()
         )
         state.onApplyRules(
-            Rules.CacheSourceDir,
+            Rules.CacheSource,
             RemoveFile()
         )
         state.onApplyRules(
@@ -45,8 +38,12 @@ object BasicCacheProcessor : BaseFeatureProcessor() {
             RemoveMarkedLine("CacheSource")
         )
         state.onApplyRules(
-            Rules.DataBuildGradle,
-            RemoveMarkedLine("{data.cache.basic}")
+            Rules.RootSettingsGradle,
+            RemoveMarkedLine("shared:data:cache")
+        )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("projects.shared.data.cache")
         )
     }
 

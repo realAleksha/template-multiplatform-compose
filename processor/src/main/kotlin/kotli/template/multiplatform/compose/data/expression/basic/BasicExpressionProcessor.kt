@@ -5,6 +5,7 @@ import kotli.engine.FeatureProcessor
 import kotli.engine.FeatureTag
 import kotli.engine.TemplateState
 import kotli.engine.template.VersionCatalogRules
+import kotli.engine.template.rule.CleanupMarkedLine
 import kotli.engine.template.rule.RemoveFile
 import kotli.engine.template.rule.RemoveMarkedLine
 import kotli.template.multiplatform.compose.Rules
@@ -27,6 +28,14 @@ object BasicExpressionProcessor : BaseFeatureProcessor() {
 
     override fun doRemove(state: TemplateState) {
         state.onApplyRules(
+            Rules.ExpressionDir,
+            RemoveFile()
+        )
+        state.onApplyRules(
+            Rules.ExpressionImplDir,
+            RemoveFile()
+        )
+        state.onApplyRules(
             Rules.ExpressionSource,
             RemoveFile()
         )
@@ -38,6 +47,16 @@ object BasicExpressionProcessor : BaseFeatureProcessor() {
             VersionCatalogRules(
                 RemoveMarkedLine("multiplatform-expressions-evaluator")
             )
+        )
+        state.onApplyRules(
+            Rules.RootSettingsGradle,
+            RemoveMarkedLine("shared:data:expression"),
+            RemoveMarkedLine("shared:data:expression-impl")
+        )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("projects.shared.data.expression"),
+            RemoveMarkedLine("projects.shared.data.expressionImpl")
         )
     }
 

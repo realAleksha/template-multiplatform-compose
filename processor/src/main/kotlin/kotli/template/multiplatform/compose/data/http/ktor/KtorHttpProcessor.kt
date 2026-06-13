@@ -30,12 +30,20 @@ object KtorHttpProcessor : BaseFeatureProcessor() {
 
     override fun doRemove(state: TemplateState) {
         state.onApplyRules(
+            Rules.HttpDir,
+            RemoveFile()
+        )
+        state.onApplyRules(
             Rules.HttpSource,
             RemoveFile()
         )
         state.onApplyRules(
             Rules.ClientCommonConfigKt,
             RemoveMarkedLine("HttpSource")
+        )
+        state.onApplyRules(
+            Rules.RootSettingsGradle,
+            RemoveMarkedLine("shared:data:http")
         )
         state.onApplyRules(
             Rules.DataBuildGradle,
@@ -45,6 +53,10 @@ object KtorHttpProcessor : BaseFeatureProcessor() {
             VersionCatalogRules(
                 RemoveMarkedLine("ktor-client")
             )
+        )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("projects.shared.data.http")
         )
     }
 

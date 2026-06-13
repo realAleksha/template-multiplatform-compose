@@ -5,8 +5,8 @@ import io.ktor.client.plugins.onDownload
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsChannel
 import io.ktor.utils.io.ByteReadChannel
-import shared.data.source.http.HttpSource
-import shared.data.source.settings.SettingsSource
+import shared.data.http.HttpSource
+import shared.data.settings.SettingsSource
 
 internal class UpdateRepositoryImpl(
     private val httpSource: HttpSource,

@@ -25,7 +25,9 @@ object CommonDataProcessor : BaseFeatureProcessor() {
         )
         state.onApplyRules(
             Rules.BuildGradle,
-            RemoveMarkedLine("shared.data")
+            RemoveMarkedLine("projects.shared.data.common"),
+            RemoveMarkedLine("shared.data"),
+            RemoveMarkedLine("shared:data")
         )
         state.onApplyRules(
             VersionCatalogRules(

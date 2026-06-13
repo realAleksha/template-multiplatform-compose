@@ -2,7 +2,7 @@ package kotli.common.data.source.database
 
 import kotli.common.data.source.database.model.User
 import kotlinx.coroutines.flow.Flow
-import shared.data.source.DataSource
+import shared.data.common.DataSource
 
 interface DatabaseSource : DataSource {
 

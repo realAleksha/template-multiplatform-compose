@@ -1,6 +1,6 @@
 package kotli
 
-import shared.data.AppHolder
+import shared.data.common.AppHolder
 import android.app.Application as AndroidApplication
 
 class Application : AndroidApplication() {

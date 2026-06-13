@@ -48,7 +48,6 @@ import shared.presentation.theme.ThemeState
 import shared.presentation.ui.theme.DsThemes
 
 fun NavGraphBuilder.app(navController: NavHostController) {
-    common(navController)
     home(navController)
 }
 
@@ -72,7 +71,7 @@ val app = module {
     single { BasicSplashProvider() }.bind<SplashFeature>()
     single { BasicLoaderProvider() }.bind<LoaderFeature>()
     single { BasicNavigationProvider() }.bind<NavigationFeature>()
-    single { RevenueCatPaymentsProvider(apiKey = "REVENUECAT_API_KEY", apiUserId = "REVENUECAT_API_USER_ID") }.bind<PaymentsFeature>()
+    single { RevenueCatPaymentsProvider()}.bind<PaymentsFeature>()
     single { BasicThemeProvider(get(), get()) }.bind<ThemeFeature>()
     single { BasicPasscodeProvider(get(), get()) }.bind<PasscodeFeature>()
     single { AdMobAdsProvider() }.bind<AdsFeature>()
@@ -96,6 +95,7 @@ val app = module {
     single { StoreUpdateProvider() }.bind<UpdateFeature>()
     single { StubAuthProvider() }.bind<AuthFeature>()
     single { SupabaseAuthProvider(get<SupabaseSource>().client) }.bind<AuthFeature>()
+    // {feature.common.client.api}
     single<FeatureContext> {
         BasicFeatureContext(
             listOf(

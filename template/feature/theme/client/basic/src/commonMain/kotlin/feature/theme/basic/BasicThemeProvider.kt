@@ -32,7 +32,7 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
-import shared.data.source.settings.SettingsSource
+import shared.data.settings.SettingsSource
 import shared.presentation.theme.ThemeState
 import kotlin.reflect.KClass
 

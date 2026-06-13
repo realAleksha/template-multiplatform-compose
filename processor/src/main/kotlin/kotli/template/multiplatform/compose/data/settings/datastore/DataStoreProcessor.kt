@@ -32,21 +32,18 @@ object DataStoreProcessor : BaseFeatureProcessor() {
         CommonSettingsProcessor::class,
     )
 
-    override fun doApply(state: TemplateState) {
-        state.onApplyRules(
-            Rules.DataBuildGradle,
-            CleanupMarkedLine("{data.settings.datastore}")
-        )
-    }
-
     override fun doRemove(state: TemplateState) {
+        state.onApplyRules(
+            Rules.DataStoreDir,
+            RemoveFile()
+        )
         state.onApplyRules(
             Rules.DataStoreSource,
             RemoveFile()
         )
         state.onApplyRules(
             Rules.DataBuildGradle,
-            RemoveMarkedLine("{data.settings.datastore}")
+            RemoveMarkedLine("androidx.datastore")
         )
         state.onApplyRules(
             VersionCatalogRules(
@@ -57,6 +54,14 @@ object DataStoreProcessor : BaseFeatureProcessor() {
             Rules.ClientCommonConfigKt,
             RemoveMarkedLine("SettingsSource"),
             RemoveMarkedLine("DataStoreSource")
+        )
+        state.onApplyRules(
+            Rules.RootSettingsGradle,
+            RemoveMarkedLine("shared:data:settings-datastore")
+        )
+        state.onApplyRules(
+            Rules.BuildGradle,
+            RemoveMarkedLine("projects.shared.data.settingsDatastore")
         )
     }
 }

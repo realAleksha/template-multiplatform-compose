@@ -15,6 +15,7 @@ import kotli.template.multiplatform.compose.data.cache.CacheProvider
 import kotli.template.multiplatform.compose.data.common.CommonDataProvider
 import kotli.template.multiplatform.compose.data.config.ConfigProvider
 import kotli.template.multiplatform.compose.data.database.DatabaseProvider
+import kotli.template.multiplatform.compose.data.encoding.EncodingProvider
 import kotli.template.multiplatform.compose.data.encryption.EncryptionProvider
 import kotli.template.multiplatform.compose.data.expression.ExpressionProvider
 import kotli.template.multiplatform.compose.data.http.HttpProvider
@@ -95,6 +96,7 @@ object MultiplatformComposeTemplateProcessor : BaseTemplateProcessor() {
         // Data Layer
         CommonDataProvider,
         SettingsProvider,
+        EncodingProvider,
         EncryptionProvider,
         ExpressionProvider,
         CacheProvider,

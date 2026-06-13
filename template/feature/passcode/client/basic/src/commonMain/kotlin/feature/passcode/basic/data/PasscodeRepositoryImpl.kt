@@ -5,10 +5,10 @@ import feature.passcode.basic.domain.model.Passcode
 import feature.passcode.basic.domain.repository.PasscodeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import shared.data.source.encoding.EncodingStrategy
-import shared.data.source.encryption.EncryptionMethod
-import shared.data.source.encryption.EncryptionSource
-import shared.data.source.settings.SettingsSource
+import shared.data.encoding.EncodingStrategy
+import shared.data.encryption.EncryptionMethod
+import shared.data.encryption.EncryptionSource
+import shared.data.settings.SettingsSource
 import kotlin.math.max
 import kotlin.random.Random
 import kotlin.time.Clock

@@ -4,7 +4,7 @@ import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import shared.data.source.http.HttpSource
+import shared.data.http.HttpSource
 
 class DefaultSideloadUpdateStateResolver(
     private val metadataUrl: String,

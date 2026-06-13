@@ -39,8 +39,8 @@ import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
-import shared.data.source.http.HttpSource
-import shared.data.source.settings.SettingsSource
+import shared.data.http.HttpSource
+import shared.data.settings.SettingsSource
 import kotlin.reflect.KClass
 
 class SideloadUpdateProvider(

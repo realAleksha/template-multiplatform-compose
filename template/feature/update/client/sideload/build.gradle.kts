@@ -20,7 +20,9 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.compose.components.resources)
             implementation(projects.feature.update.client.api)
-            implementation(projects.shared.data)
+            implementation(projects.shared.data.common)
+            implementation(projects.shared.data.http)
+            implementation(projects.shared.data.settings)
             implementation(projects.shared.presentation)
             implementation(projects.feature.common.client.api)
             implementation(projects.feature.common.client.koin)
